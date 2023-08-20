@@ -15,7 +15,82 @@
 
     </header>
     <main>
+        <!-- CURRENT DATE AND TIME-->
+        <div id="day"></div>
+        <div id="hijri"></div>
+        <div id="date"></div>
+
+        <div class="cssClock">
+            <div id="fullTime"></div>
+            <div id="cssClockExtra">
+                <div id="seconds"></div>
+                <div id="ampm"></div>
+            </div>
+        </div>
+
+        <!-- ANNOUNCEMENTS-->
+        <div id="extraInfo">
+            <div id="info" class="announcements">ANNOUNCEMENTS:</div>
+        </div>
+
+        <!-- DISPLAY NAMAAZ TIMES-->
+        <div class="titleDisplay">
+            <div>Start</div>
+            <div>Jamaat</div>
+        </div>
+        <div class="displayTimes" id="tube0">
+            <div class="namaazName">FAJR</div>
+            <div id="FajrStart" class="nStart"></div>
+            <div id="FajrJamaat" class="nJamaat"></div>
+        </div>
+        <div class="displayTimes hidden" id="tube0">
+            <div class="namaazName">EID</div>
+            <div id="FajrStart" class="nStart"></div>
+            <div id="FajrJamaat" class="nJamaat"></div>
+        </div>
+        <div class="displayTimes" id="tube0">
+            <div class="namaazName">ZOHAR</div>
+            <div id="FajrStart" class="nStart"></div>
+            <div id="FajrJamaat" class="nJamaat"></div>
+        </div>
+        <div class="displayTimes" id="tube0">
+            <div class="namaazName">ASAR</div>
+            <div id="FajrStart" class="nStart"></div>
+            <div id="FajrJamaat" class="nJamaat"></div>
+        </div>
+        <div class="displayTimes" id="tube0">
+            <div class="namaazName">MAGHRIB</div>
+            <div id="FajrStart" class="nStart"></div>
+            <div id="FajrJamaat" class="nJamaat"></div>
+        </div>
+        <div class="displayTimes" id="tube0">
+            <div class="namaazName">ISHA</div>
+            <div id="FajrStart" class="nStart"></div>
+            <div id="FajrJamaat" class="nJamaat"></div>
+        </div>
         
+        <div class="displayTimes hidden" id="tubeEC">
+            <div id="T_EID" class="eidCountDown">EID</div>
+
+        </div>
+        <!-- ADDITIONAL INFO DISPLAY -->
+
+        <div class="CSS_EXTRA" id="extraInfo">
+            <div class="CSS_EXTRA_INFO">
+                <div id="sehriEnds" class="InfoTimes"></div>
+                <div class="eName">SEHRI ENDS</div>
+            </div>
+            <div class="CSS_EXTRA_INFO">
+                <div id="sunrise" class="InfoTimes"></div>
+                <div class="eName">SUNRISE</div>
+            </div>
+            <div class="CSS_EXTRA_INFO">
+                <div id="zawaal" class="InfoTimes">00:00</div>
+                <div id="zawaalTitle" class="eName">ISTIWA</div>
+
+            </div>
+
+        </div>
     </main>
 <script src="assets/js/script.js"></script>
 </body>
