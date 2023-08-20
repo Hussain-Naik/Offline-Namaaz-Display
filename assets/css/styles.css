@@ -18,3 +18,13 @@ body {
     background-size: 100% 100%; 
     background-repeat: no-repeat;
 }
+header {
+    height: 13%;
+}
+
+main {
+    height: 87%;
+}
+.cssClock {
+    font-family: 'digital-7', sans-serif;
+}
