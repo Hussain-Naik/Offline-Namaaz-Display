@@ -28,3 +28,26 @@ main {
 .cssClock {
     font-family: 'digital-7', sans-serif;
 }
+
+.displayTimes {
+    width: 85%;
+    margin: auto;
+    height: 6.6%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.extraInfo {
+    width: 85%;
+    margin: auto;
+    height: 6.6%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.namaazName {
+    width: 100px;
+}
