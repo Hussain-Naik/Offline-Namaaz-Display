@@ -178,7 +178,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     background-color: var(--color1); 
     position: fixed;
     padding-top: 13%;
-    background-color: #000000ae;
+    background-color: #000000e8;
     left: 25%;
     width: 100%;
     height: 100vh;
@@ -195,6 +195,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 }
 
 .inputBox input {
+    font-family: 'digital-7', sans-serif;
     position: relative;
     width: 100%;
     padding: 10px 0;
@@ -208,6 +209,22 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     letter-spacing: .15em;
 }
 
+.inputBox input[type="submit"] {
+    border: none;
+    color: #999;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 1.15em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.inputBox input[type="submit"]:hover {
+    letter-spacing: 0.35em;
+    color: #708e6a;
+}
 .inputBox label {
     position: absolute;
     left: 0;
