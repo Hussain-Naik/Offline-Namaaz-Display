@@ -186,3 +186,37 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     transition: .6s;
     transform: translateX(100%);
 }
+
+.inputBox {
+    position: relative;
+    width: 300px;
+    margin-bottom: 40px;
+    margin-left: 10px;
+}
+
+.inputBox input {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #999;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+}
+
+.inputBox label {
+    position: absolute;
+    left: 0;
+    padding: 10px 0;
+    pointer-events: none;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.inputBox input:focus {
+    border-bottom: 2px solid #708e6a;
+}
