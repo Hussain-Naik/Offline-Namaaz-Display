@@ -202,7 +202,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     border: none;
     border-bottom: 2px solid #999;
     outline: none;
-    color: #fff;
+    color: transparent;
     font-size: 1em;
     text-transform: uppercase;
     letter-spacing: .15em;
@@ -217,6 +217,20 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     text-transform: uppercase;
 }
 
+.inputBox label span {
+    position: relative;
+    display: inline-flex;
+    letter-spacing: .05em;
+    transition: .2s ease-in-out;
+}
+
+.inputBox input:focus ~ label span {
+    color: #708e6a;
+    letter-spacing: .15em;
+    transform: translateY(-25px);
+}
+
 .inputBox input:focus {
     border-bottom: 2px solid #708e6a;
+    color: #fff;
 }
