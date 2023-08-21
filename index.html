@@ -12,19 +12,38 @@
     </head>
 <body>
     <header>
-        <input type="checkbox" id="toggle">
+        <input type="checkbox" id="toggle" class="hidden">
         <label class="menu-toggle" for="toggle">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </label>
-        <ul id="menu">
-            <li class="menu-items"><a href="index.html" aria-label="menu link to home page">Home</a></li>
-            <li class="menu-items"><a href="#about" aria-label="link to our about us section in home page">About Us</a></li>
-            <li class="menu-items"><a href="#events" aria-label="link to our events section on the home page">Events</a></li>
-            <li class="menu-items"><a href="prayertimes.html" aria-label="menu link to prayer times page">Prayer Times</a></li>
-            <li class="menu-items"><a href="contact.html" aria-label="menu link to contact us page">Contact Us</a></li>
-        </ul>
+        <form id="menu">
+            <div class="inputBox">
+                <input type="number">
+                <label for="">Adjust Islamic date</label>
+            </div>
+            <div class="inputBox">
+                <input type="text">
+                <label for="">Announcements</label>
+            </div>
+            <div class="inputBox">
+                <input type="text">
+                <label for="">Eid Namaaz Time</label>
+            </div>
+            <div class="inputBox">
+                <input type="number">
+                <label for="">Slide Count</label>
+            </div>
+            <div class="inputBox">
+                <input type="number">
+                <label for="">Slide Timer</label>
+            </div>
+            <div class="inputBox">
+                <input type="number">
+                <label for="">Slide Duration</label>
+            </div>
+            </form>
     </header>
     <main>
         <!-- CURRENT DATE AND TIME-->
