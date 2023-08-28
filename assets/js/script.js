@@ -1,14 +1,37 @@
-let form = document.getElementById('menu')
-form.addEventListener('click', function(event) {
-    event.preventDefault()
-    console.log('new page')
-})
-let label = form.querySelectorAll('label').
-forEach(label => {
-    label.innerHTML = label.innerText.split('').map(
-        (letters, i) => `<span style='transition-delay: ${i * 50}ms'>${letters}</span>`
-    ).join(' ');
-})
+document.addEventListener("DOMContentLoaded", function() {
+	let form = document.getElementById('menu')
+    form.lastElementChild.addEventListener('click', function(event) {
+        event.preventDefault()
+        console.log('new page')
+        
+    })
+    let label = form.querySelectorAll('label').forEach(label => {
+        label.innerHTML = label.innerText.split('').map(
+            (letters, i) => `<span style='transition-delay: ${i * 50}ms'>${letters}</span>`
+        ).join(' ');
+    })
+
+    let inputs = form.querySelectorAll('input');
+    for (let input of inputs) {
+        if (input.type != 'submit') {
+            input.value = localStorage.getItem(input.id);
+            input.addEventListener('keydown', function(event) {
+                if (event.key === "Enter") {
+                    inputUpdate(input.id, input.value);
+                    event.preventDefault()
+                }
+            });
+        }
+	}
+
+});
+
+
+
+function inputUpdate(id, input) {
+    localStorage.setItem(id, input)
+    console.log(id, input);
+}
 
 function formatTIME12H(date) {
     let hours = date.getHours();
