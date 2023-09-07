@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-	let form = document.getElementById('menu')
+    let main = document.querySelector('main');
+    main.addEventListener('click', function() {
+        document.getElementById('toggle').checked = false;
+    })
+	let form = document.getElementById('menu');
     form.lastElementChild.addEventListener('click', function(event) {
         event.preventDefault()
         console.log('new page')
@@ -30,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function inputUpdate(id, input) {
     localStorage.setItem(id, input)
-    console.log(id, input);
 }
 
 function formatTIME12H(date) {
