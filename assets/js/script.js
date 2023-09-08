@@ -68,7 +68,7 @@ function checkTimer(namaaz, date) {
 function add12Hours(timeParameter) {
     let arrayTime = timeParameter.split(":");
     if (Number(arrayTime[0]) < 12) {
-        arrayTime[0] += 12;
+        arrayTime[0] = Number(arrayTime[0]) + 12;
     }
     return arrayTime[0] + ':' + arrayTime[1];
 }
