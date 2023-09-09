@@ -12,44 +12,68 @@
     </head>
 <body>
     <header>
-        <input type="checkbox" id="toggle" class="hidden">
-        <label class="menu-toggle" for="toggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </label>
-        <form id="menu">
-            <div class="inputBox">
-                <input type="number" id="inputAdjustIDate">
-                <label for="">Adjust Islamic date</label>
+        <input type="file" accept=".csv" id="picker">
+        <div class="calendar">
+            <div id="monday" class="days">
+                <div class="card1"></div>
+                <div class="card2"></div>
+                <div class="card3"></div>
+                <div class="card4"></div>
+                <div class="card5"></div>
+                <div class="card6"></div>
             </div>
-            <div class="inputBox">
-                <input type="text" id="inputAnnouncements">
-                <label for="">Announcements</label>
+            <div id="tuesday" class="days">
+                <div class="card1"></div>
+                <div class="card2"></div>
+                <div class="card3"></div>
+                <div class="card4"></div>
+                <div class="card5"></div>
+                <div class="card6"></div>
             </div>
-            <div class="inputBox">
-                <input type="text" id="inputEidTime">
-                <label for="">Eid Namaaz Time</label>
+            <div id="wednesday" class="days">
+                <div class="card1"></div>
+                <div class="card2"></div>
+                <div class="card3"></div>
+                <div class="card4"></div>
+                <div class="card5"></div>
+                <div class="card6"></div>
             </div>
-            <div class="inputBox">
-                <input type="number" id="inputSlideCount">
-                <label for="">Slide Count</label>
+            <div id="thursday" class="days">
+                <div class="card1"></div>
+                <div class="card2"></div>
+                <div class="card3"></div>
+                <div class="card4"></div>
+                <div class="card5"></div>
+                <div class="card6"></div>
             </div>
-            <div class="inputBox">
-                <input type="number" id="inputSlideTimer">
-                <label for="">Slide Timer</label>
+            <div id="friday" class="days">
+                <div class="card1"></div>
+                <div class="card2"></div>
+                <div class="card3"></div>
+                <div class="card4"></div>
+                <div class="card5"></div>
+                <div class="card6"></div>
             </div>
-            <div class="inputBox">
-                <input type="number" id="inputSlideDuration">
-                <label for="">Slide Duration</label>
+            <div id="saturday" class="days">
+                <div class="card1"></div>
+                <div class="card2"></div>
+                <div class="card3"></div>
+                <div class="card4"></div>
+                <div class="card5"></div>
+                <div class="card6"></div>
             </div>
-            <div class="inputBox">
-                <input type="submit" value="Edit Times" id="submit">
+            <div id="sunday" class="days">
+                <div class="card1"></div>
+                <div class="card2"></div>
+                <div class="card3"></div>
+                <div class="card4"></div>
+                <div class="card5"></div>
+                <div class="card6"></div>
             </div>
-            </form>
+        </div>
     </header>
     <main>
-        <input type="file" accept=".csv" id="picker">
+        
     </main>
 <script>
     window.onload = () => {
