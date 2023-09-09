@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	let form = document.getElementById('menu');
     form.lastElementChild.addEventListener('click', function(event) {
         event.preventDefault()
-        console.log('new page')
+        let newURL = String(location.origin) + '/namaazData.html';
+        location.assign(newURL)
+        
         
     })
     let label = form.querySelectorAll('label').forEach(label => {
