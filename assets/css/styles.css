@@ -13,12 +13,12 @@
 
 body {
     width: 100%;
-    height: 100vh;
     margin: 0px;
     font-family: sans-serif;
 }
 
 .indexBody {
+    height: 100vh;
     overflow: hidden;
     background-image: url(../images/background2.jpg); 
     background-size: 100% 100%; 
@@ -253,4 +253,32 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 .inputBox input:focus {
     border-bottom: 2px solid #708e6a;
     color: #fff;
+}
+
+#calendar {
+    width: 25vh;
+    text-align: center;
+    margin: 1vh auto;
+}
+.dFRows {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dFColumns {
+    display: flex;
+    flex-direction: column;
+    gap: .5vh;
+}
+
+.card {
+    width: 3vh;
+    height: 3vh;
+    background-color: #708e6a;
+}
+
+.mButton {
+    width: 3vh;
+    height: 3vh;
 }
