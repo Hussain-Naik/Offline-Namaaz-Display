@@ -61,7 +61,11 @@
               reader.onloadend = () => {
                   let csv = reader.result;
                   let array = csv.split(/[\r\n]+/g);
-                  console.log(array[0]);
+                  array.forEach(element => {
+                    element = element.split(',')
+                    console.log(element)
+                  });
+                  //console.log(array);
               }
 
           }
