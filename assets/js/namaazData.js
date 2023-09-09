@@ -1,4 +1,5 @@
 window.onload = () => {
+    loopMonths(0);
     var reader = new FileReader(),
         picker = document.getElementById("picker");
 
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let previousMonth = document.getElementById('prevousM');
     let nextMonth = document.getElementById('nextM');
     let month = document.getElementById('currentM');
+    let selection = document.getElementById('select');
     let monthNames = new Array("January", "February", "March", "April",
 		"May", "June", "July", "August",
 		"September", "October", "November", "December");
@@ -40,6 +42,19 @@ document.addEventListener("DOMContentLoaded", function() {
         loopMonths(incMonth);
         
     })
+
+    selection.addEventListener('click', function() {
+        let child = selection.getElementsByClassName('visible')[0];
+        child.classList.replace('visible', 'hidden');
+        if (child.nextElementSibling == null) {
+            child.parentElement.firstElementChild.classList.replace('hidden', 'visible');
+        }
+        else {
+            child.nextElementSibling.classList.replace('hidden', 'visible');
+        }
+        
+        
+    })
 });
 
 function loopMonths(month) {
@@ -57,6 +72,7 @@ function loopMonths(month) {
         }
         if (Number(loopDate.getMonth()) <= month) {
             insert.innerHTML = d;
+            insert.classList.add('available');
         }
         d++;
     }
