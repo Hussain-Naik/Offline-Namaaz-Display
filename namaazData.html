@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Masjid E Rizwan Website Namaaz times, Community events">
+        <meta name="keywords" content="mosque, masjid, prayer times, namaaz times, shafii, community events">
+        <meta name="author" content="Hussain Naik">
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <title>Masjid-E-Rizwan | Namaaz Data</title>
+    </head>
+<body>
+    <header>
+        <input type="checkbox" id="toggle" class="hidden">
+        <label class="menu-toggle" for="toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+        <form id="menu">
+            <div class="inputBox">
+                <input type="number" id="inputAdjustIDate">
+                <label for="">Adjust Islamic date</label>
+            </div>
+            <div class="inputBox">
+                <input type="text" id="inputAnnouncements">
+                <label for="">Announcements</label>
+            </div>
+            <div class="inputBox">
+                <input type="text" id="inputEidTime">
+                <label for="">Eid Namaaz Time</label>
+            </div>
+            <div class="inputBox">
+                <input type="number" id="inputSlideCount">
+                <label for="">Slide Count</label>
+            </div>
+            <div class="inputBox">
+                <input type="number" id="inputSlideTimer">
+                <label for="">Slide Timer</label>
+            </div>
+            <div class="inputBox">
+                <input type="number" id="inputSlideDuration">
+                <label for="">Slide Duration</label>
+            </div>
+            <div class="inputBox">
+                <input type="submit" value="Edit Times" id="submit">
+            </div>
+            </form>
+    </header>
+    <main>
+        <input type="file" accept=".csv" id="picker">
+    </main>
+<script>
+    window.onload = () => {
+              var reader = new FileReader(),
+                  picker = document.getElementById("picker");
+
+              picker.onchange = () => reader.readAsText(picker.files[0]);
+
+              reader.onloadend = () => {
+                  let csv = reader.result;
+                  let array = csv.split(/[\r\n]+/g);
+                  console.log(array[0]);
+              }
+
+          }
+</script>
+</body>
+</html>
