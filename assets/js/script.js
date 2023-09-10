@@ -10,12 +10,16 @@ let message = document.getElementById("announcements");
 const adjustIDate = localStorage.getItem('inputAdjustIDate');
 const eidNamaazTime = localStorage.getItem('inputEidTime');
 const announcements = localStorage.getItem('inputAnnouncements');
+const namaazData = JSON.parse(localStorage.getItem('NamaazData'));
 
 cDay.innerHTML = writeDay();
 cDate.innerHTML = writeDate();
 cIDate.innerHTML = writeIslamicDate(adjustIDate);
 eidTime.innerHTML = eidNamaazTime;
+eidTime.parentElement.setAttribute('data-type', eidNamaazTime)
 message.innerHTML += announcements;
+
+populateTimes();
 
 document.addEventListener("DOMContentLoaded", function() {
     let main = document.querySelector('main');
@@ -50,6 +54,36 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 });
+
+function populateTimes() {
+	let today = new Date();
+	let d = today.getDate() < 10 ? '0' + today.getDate() : today.getDate();
+	let m = (today.getMonth() + 1);
+	m = m < 10 ? '0' + m : m;
+	let y = today.getFullYear();
+	let dateString = d + '/' + m + '/' + y;
+	let currentTimes = namaazData[dateString];
+	console.log(currentTimes['Asar Start']);
+	let startTimes = document.getElementsByClassName('start');
+	let jamaatTimes = document.getElementsByClassName('jamaat');
+	for (let i = 0; i < 5; i++) {
+		startTimes[i].innerHTML = currentTimes[startTimes[i].getAttribute('data-target')];
+		jamaatTimes[i].innerHTML = currentTimes[jamaatTimes[i].getAttribute('data-target')];
+		startTimes[i].parentElement.setAttribute('data-type', currentTimes[jamaatTimes[i].getAttribute('data-target')])
+	}
+
+}
+
+function getDateByOffset(start, offset) {
+  var date = new Date(start || Date.now());
+  var n = Number(offset);
+
+  if (n !== n || date.toString() == "Invalid Date") { return date; }
+
+  date.setDate(date.getDate() + n);
+
+  return date;
+}
 
 function gmod(n,m){
 	return ((n%m)+m)%m;
