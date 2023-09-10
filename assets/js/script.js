@@ -62,27 +62,38 @@ function populateTimes() {
 	m = m < 10 ? '0' + m : m;
 	let y = today.getFullYear();
 	let dateString = d + '/' + m + '/' + y;
+	let tomorrow = getDateByOffset(today, 1)
 	let currentTimes = namaazData[dateString];
-	console.log(currentTimes['Asar Start']);
-	let startTimes = document.getElementsByClassName('start');
-	let jamaatTimes = document.getElementsByClassName('jamaat');
+	let nextTimes = namaazData[tomorrow]
+	console.log(dateString, tomorrow);
+	let cStart = document.getElementsByClassName('cStart');
+	let cJamaat = document.getElementsByClassName('cJamaat');
+	let nStart = document.getElementsByClassName('nStart');
+	let nJamaat = document.getElementsByClassName('nJamaat');
 	for (let i = 0; i < 5; i++) {
-		startTimes[i].innerHTML = currentTimes[startTimes[i].getAttribute('data-target')];
-		jamaatTimes[i].innerHTML = currentTimes[jamaatTimes[i].getAttribute('data-target')];
-		startTimes[i].parentElement.setAttribute('data-type', currentTimes[jamaatTimes[i].getAttribute('data-target')])
+		cStart[i].innerHTML = currentTimes[cStart[i].getAttribute('data-target')];
+		cJamaat[i].innerHTML = currentTimes[cJamaat[i].getAttribute('data-target')];
+		nStart[i].innerHTML = nextTimes[nStart[i].getAttribute('data-target')];
+		nJamaat[i].innerHTML = nextTimes[nJamaat[i].getAttribute('data-target')];
+		cStart[i].parentElement.setAttribute('data-type', currentTimes[cJamaat[i].getAttribute('data-target')])
 	}
 
 }
 
 function getDateByOffset(start, offset) {
-  var date = new Date(start || Date.now());
-  var n = Number(offset);
+	var date = new Date(start || Date.now());
+	var n = Number(offset);
 
-  if (n !== n || date.toString() == "Invalid Date") { return date; }
+	if (n !== n || date.toString() == "Invalid Date") { return date; }
 
-  date.setDate(date.getDate() + n);
+	date.setDate(date.getDate() + n);
 
-  return date;
+	let d = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+	let m = (date.getMonth() + 1);
+	m = m < 10 ? '0' + m : m;
+	let y = date.getFullYear();
+	let dateString = d + '/' + m + '/' + y;
+  return dateString;
 }
 
 function gmod(n,m){
@@ -204,6 +215,13 @@ function checkTimer(namaaz, date) {
     let timer = returnTimeDifference(currentTime , namaazTime)
     if (timer < 0) {
         namaaz.classList.remove('active');
+		if (namaaz.getAttribute('id') != 'eid') {
+			namaaz.getElementsByClassName('cStart')[0].classList.replace('visible', 'hidden');
+			namaaz.getElementsByClassName('cJamaat')[0].classList.replace('visible', 'hidden');
+			namaaz.getElementsByClassName('nStart')[0].classList.replace('hidden', 'visible');
+			namaaz.getElementsByClassName('nJamaat')[0].classList.replace('hidden', 'visible');
+		}
+		
     }
     //console.log(timer)
 }
