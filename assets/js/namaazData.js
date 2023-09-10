@@ -6,13 +6,19 @@ window.onload = () => {
     picker.onchange = () => reader.readAsText(picker.files[0]);
 
     reader.onloadend = () => {
+        const data = {};
         let csv = reader.result;
+        let map = ['Date', 'Sehri End', 'Fajr Start', 'Fajr Jamaat', 'Sunrise', 'Zohar Start', 'Zohar Jamaat', 'Asar Start', 'Asar Jamaat', 'Maghrib Start', 'Maghrib Jamaat', 'Isha Start', 'Isha Jamaat']
         let array = csv.split(/[\r\n]+/g);
         array.forEach(element => {
-          element = element.split(',')
-          console.log(element)
+          element = element.split(',');
+          let lineData = {}
+          for (let i = 0; i < element.length ; i ++) {
+            lineData[map[i]] = element[i];
+          }
+          data[element[0]] = lineData;
         });
-        //console.log(array);
+        localStorage.setItem('NamaazData', JSON.stringify(data))
     }
 
 }
