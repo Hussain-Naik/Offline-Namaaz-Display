@@ -79,6 +79,15 @@ function populateTimes() {
 		nJamaat[i].innerHTML = nextTimes[nJamaat[i].getAttribute('data-target')];
 		cStart[i].parentElement.setAttribute('data-type', currentTimes[cJamaat[i].getAttribute('data-target')])
 	}
+	let cXInfo = document.getElementsByClassName('cXInfo');
+	let nXInfo = document.getElementsByClassName('nXInfo');
+	for (let i = 0; i < 2; i++) {
+		cXInfo[i].innerHTML = currentTimes[cXInfo[i].getAttribute('data-target')]
+		cXInfo[i].setAttribute('data-type', currentTimes[cXInfo[i].getAttribute('data-target')])
+		nXInfo[i].innerHTML = nextTimes[nXInfo[i].getAttribute('data-target')]
+		nXInfo[i].setAttribute('data-type', nextTimes[nXInfo[i].getAttribute('data-target')])
+	}
+
 
 }
 
