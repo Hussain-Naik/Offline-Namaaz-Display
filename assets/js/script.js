@@ -292,7 +292,7 @@ function checkNamaazTimer(namaaz, date) {
 		}
 		
     }
-	else if (0 < Number(timer)  && Number(timer) < 46) {
+	else if (Number(timer) > 0 && Number(timer) < 46) {
 		namaaz.getElementsByClassName('cJamaat')[0].classList.add('countdown');
 		namaaz.getElementsByClassName('cJamaat')[0].innerHTML = timer;
 	}
@@ -309,12 +309,32 @@ function checkInfoTimer(info, date) {
     }
 	let timer = returnTimeDifference(currentTime , infoTimer);
 	if (Number(timer) <= 0) {
-		info.setAttribute('class', 'infoItems');
+		if (info.firstElementChild.getAttribute('id') != 'zawaal') {
+			info.setAttribute('class', 'infoItems');
+		}
+		else {
+			let zSeconds = convertToSeconds(info.firstElementChild.getAttribute('data-type'));
+			let zawaalTimer = returnTimeDifference(currentTime , add12Hours(convertToTime(zSeconds, 10)));
+			if (Number(zawaalTimer) <= 0) {
+				info.setAttribute('class', 'infoItems');
+				info.firstElementChild.classList.remove('countdown');
+				info.firstElementChild.innerHTML = info.firstElementChild.getAttribute('data-type');
+			}
+			else if (Number(zawaalTimer) > 0 && Number(zawaalTimer) < 600) {
+				info.firstElementChild.classList.add('countdown');
+				info.firstElementChild.innerHTML = displayZawaalTime(zawaalTimer);
+			}
+		}
+		
 		updateFocus();
-		if (info.getElementsByClassName('cXInfo')[0] != undefined) {
+		if (info.getElementsByClassName('cXInfo')[0] != undefined ) {
 			info.getElementsByClassName('cXInfo')[0].classList.replace('visible', 'hidden');
 			info.getElementsByClassName('nXInfo')[0].classList.replace('hidden', 'visible');
 		}
+	}
+	else if (Number(timer) > 0 && Number(timer) < 46 && info.firstElementChild.getAttribute('id') != 'zawaal') {
+		info.getElementsByClassName('cXInfo')[0].classList.add('countdown');
+		info.getElementsByClassName('cXInfo')[0].innerHTML = timer;
 	}
 }
 
@@ -343,6 +363,17 @@ function convertToTime(seconds, offset) {
     h = formatTIME12H(h);
     s = checkTime(s);
     return h + ':' + m ;
+}
+
+function displayZawaalTime(seconds) {
+	let m = Math.floor(seconds / 60);
+    let s = seconds % 60;
+	m = checkTime(m);
+	s = checkTime(s);
+	if (seconds <= 60) {
+		return s;
+	}
+	return m + ':' + s ;
 }
 
 function checkTime(i) {
