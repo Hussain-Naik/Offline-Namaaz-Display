@@ -7,19 +7,30 @@ let cIDate = document.getElementById("hijri");
 let eidTime = document.getElementById("eidJamaat");
 let message = document.getElementById("announcements");
 
+//const wdNames = new Array("Ahad","Ithnin","Thulatha","Arbaa","Khams","Jumuah","Sabt");
+const iMonthNames = new Array("Muharram","Safar","Rabi'ul Awwal","Rabi'ul Akhir",
+"Jumadal Awwal","Jumadal Akhir","Rajab","Sha'ban",
+"Ramadan","Shawwal","Dhul Qa'ada","Dhul Hijja");
+
 const adjustIDate = localStorage.getItem('inputAdjustIDate');
 const eidNamaazTime = localStorage.getItem('inputEidTime');
 const announcements = localStorage.getItem('inputAnnouncements');
 const namaazData = JSON.parse(localStorage.getItem('NamaazData'));
+const islamicDate = [ writeIslamicDate(adjustIDate) , writeIslamicDate(adjustIDate + 1) ];
+// testing const islamicDate = ['30 Ramadan 1445', '1 Shawwal 1445' ];
+
 
 cDay.innerHTML = writeDay();
 cDate.innerHTML = writeDate();
-cIDate.innerHTML = writeIslamicDate(adjustIDate);
+cIDate.innerHTML = islamicDate[0];
 eidTime.innerHTML = eidNamaazTime;
 eidTime.parentElement.setAttribute('data-type', eidNamaazTime)
 message.innerHTML += announcements;
 
 populateTimes();
+
+let isEid = checkEidDay();
+toggleEid();
 
 document.addEventListener("DOMContentLoaded", function() {
     let main = document.querySelector('main');
@@ -192,10 +203,6 @@ function kuwaiticalendar(adjust){
 	return myRes;
 }
 function writeIslamicDate(adjustment) {
-	//let wdNames = new Array("Ahad","Ithnin","Thulatha","Arbaa","Khams","Jumuah","Sabt");
-	let iMonthNames = new Array("Muharram","Safar","Rabi'ul Awwal","Rabi'ul Akhir",
-	"Jumadal Awwal","Jumadal Akhir","Rajab","Sha'ban",
-	"Ramadan","Shawwal","Dhul Qa'ada","Dhul Hijja");
 	let iDate = kuwaiticalendar(adjustment);
 	//let dateID = adjustID + iDate[5];
     let dateID = iDate[5];
@@ -204,6 +211,27 @@ function writeIslamicDate(adjustment) {
 	return outputIslamicDate;
 }
 
+function checkEidDay() {
+	let bool1 = false;
+	let bool2 = false;
+	let bool = false;
+	let outputIslamicDate = cIDate.innerHTML.slice(0, -5)
+	bool1 = outputIslamicDate == "10 Dhul Hijja" ? true : false;
+	bool2 = outputIslamicDate == "1 Shawwal" ? true : false;
+	bool = bool1 || bool2 ? true : false;
+	return bool;
+}
+
+function toggleEid() {
+	let eidHTML = document.getElementById('eid');
+	if (isEid == true) {
+		eidHTML.classList.replace('hidden', 'visible')
+	}
+	else {
+		eidHTML.classList.add('hidden')
+	}
+	
+}
 function inputUpdate(id, input) {
     localStorage.setItem(id, input)
 }
@@ -229,6 +257,11 @@ function checkTimer(namaaz, date) {
 			namaaz.getElementsByClassName('cJamaat')[0].classList.replace('visible', 'hidden');
 			namaaz.getElementsByClassName('nStart')[0].classList.replace('hidden', 'visible');
 			namaaz.getElementsByClassName('nJamaat')[0].classList.replace('hidden', 'visible');
+		}
+		if (namaaz.getAttribute('id') == 'maghrib') {
+			cIDate.innerHTML = islamicDate[1];
+			isEid = checkEidDay();
+			toggleEid();
 		}
 		
     }
@@ -292,10 +325,10 @@ function formatTIME12H(date) {
 
 function writeDate() {
     let d = new Date();
-	let iMonthNames = new Array("January", "February", "March", "April",
+	let gMonthNames = new Array("January", "February", "March", "April",
 		"May", "June", "July", "August",
 		"September", "October", "November", "December");
-	let outputDate = d.getDate() + " " + iMonthNames[d.getMonth()] + " " + d.getFullYear();
+	let outputDate = d.getDate() + " " + gMonthNames[d.getMonth()] + " " + d.getFullYear();
 	return outputDate;
 }
 function writeDay() {
