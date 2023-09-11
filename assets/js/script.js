@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function updateFocus() {
 	let infoItems = document.getElementsByClassName('focus');
 	if (infoItems.length == 1){
-		infoItems[0].classList.add('fLast')
+		infoItems[0].classList.replace('focus','fLast')
 	}
 	else {
 		infoItems[0].classList.add('fFirst')

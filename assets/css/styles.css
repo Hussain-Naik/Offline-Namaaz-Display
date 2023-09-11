@@ -132,6 +132,9 @@ main {
 
 .fLast {
     border-radius: 75px;
+    opacity: 1;
+    background-color: #000000ae;
+    color: white;
 }
 
 .extraInfo {
