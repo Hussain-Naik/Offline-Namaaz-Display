@@ -79,8 +79,8 @@ function populateTimes() {
 	let nJamaat = document.getElementsByClassName('nJamaat');
 	let istiwaHTML = document.getElementById('zawaal');
 	let istiwa = convertToSeconds(add12Hours(currentTimes['Zohar Start']))
-	istiwaHTML.innerHTML = convertToTime(istiwa, -5);
-	istiwaHTML.setAttribute('data-type', convertToTime(istiwa, -5))
+	istiwaHTML.innerHTML = convertToTime(istiwa, -10);
+	istiwaHTML.setAttribute('data-type', convertToTime(istiwa, -10))
 	for (let i = 0; i < 5; i++) {
 		cStart[i].innerHTML = currentTimes[cStart[i].getAttribute('data-target')];
 		cJamaat[i].innerHTML = currentTimes[cJamaat[i].getAttribute('data-target')];
@@ -327,7 +327,7 @@ function formatTIME12H(date) {
 		strTime = hours + ':' + minutes;
 	}
     else {
-		hours = Number(date) - 12;
+		hours = (Number(date) == 12) ? Number(date) : Number(date) - 12;
 		hours = checkTime(hours);
 		strTime = hours;
 	}
