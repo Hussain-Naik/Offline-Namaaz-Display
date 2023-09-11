@@ -304,6 +304,10 @@ function checkInfoTimer(info, date) {
 	if (timer < 0) {
 		info.setAttribute('class', 'infoItems');
 		updateFocus();
+		if (info.getElementsByClassName('cXInfo')[0] != undefined) {
+			info.getElementsByClassName('cXInfo')[0].classList.replace('visible', 'hidden');
+			info.getElementsByClassName('nXInfo')[0].classList.replace('hidden', 'visible');
+		}
 	}
 }
 
