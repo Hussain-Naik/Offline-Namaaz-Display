@@ -66,7 +66,7 @@ function updateFocus() {
 	if (infoItems.length == 1){
 		infoItems[0].classList.replace('focus','fLast')
 	}
-	else {
+	else if (infoItems.length > 1) {
 		infoItems[0].classList.add('fFirst')
 	}
 }
@@ -236,10 +236,10 @@ function checkEidDay() {
 function toggleEid() {
 	let eidHTML = document.getElementById('eid');
 	if (isEid == true) {
-		eidHTML.classList.replace('hidden', 'visible')
+		eidHTML.classList.replace('hidden', 'active')
 	}
 	else {
-		eidHTML.classList.add('hidden')
+		eidHTML.classList.replace('active', 'hidden')
 	}
 	
 }
@@ -251,7 +251,19 @@ function getActiveNamaaz() {
     let activeNamaaz = document.getElementsByClassName('active')[0];
     return activeNamaaz;
 }
-function checkTimer(namaaz, date) {
+
+function getActiveInfo() {
+    let activeInfo = document.getElementsByClassName('focus')[0];
+	if (activeInfo == undefined){
+		activeInfo = document.getElementsByClassName('fLast')[0];
+	}
+	if (activeInfo == undefined){
+		return false;
+	}
+    return activeInfo;
+}
+
+function checkNamaazTimer(namaaz, date) {
     let currentTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
     let namaazTime;
     if (namaaz.getAttribute('id') == 'fajr' || namaaz.getAttribute('id') == 'eid') {
@@ -277,6 +289,22 @@ function checkTimer(namaaz, date) {
 		
     }
     //console.log(timer)
+}
+
+function checkInfoTimer(info, date) {
+	let currentTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+	let infoTimer;
+    if (info.firstElementChild.getAttribute('id') != 'zawaal') {
+        infoTimer = info.firstElementChild.getAttribute('data-type');
+    }
+    else{
+        infoTimer = add12Hours(info.firstElementChild.getAttribute('data-type'));
+    }
+	let timer = returnTimeDifference(currentTime , infoTimer);
+	if (timer < 0) {
+		info.setAttribute('class', 'infoItems');
+		updateFocus();
+	}
 }
 
 function add12Hours(timeParameter) {
@@ -369,9 +397,13 @@ setInterval(() => {
     let dSec = checkTime(d.getSeconds());
     let ampm = dHours >= 12 ? 'pm' : 'am';
     let activeNamaaz = getActiveNamaaz();
+	let activeInfo = getActiveInfo();
 
     ctime.innerHTML = formatTIME12H(d);
-    checkTimer(activeNamaaz, d)
+    checkNamaazTimer(activeNamaaz, d);
+	if (activeInfo != false) {
+		checkInfoTimer(activeInfo, d);
+	}
     cSec.innerHTML = dSec;
     cAMPM.innerHTML = ampm;
     if (dHours == 0 && dMinutes == 0 && dSec == 0) { location.reload(); }
