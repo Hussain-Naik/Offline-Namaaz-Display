@@ -115,6 +115,25 @@ main {
     background-color: #000000ae;
     color: white;
 }
+
+.focus {
+    opacity: 1;
+    background-color: #000000ae;
+    color: white;
+}
+
+.fFirst {
+    border-radius: 75px 0 0 75px;
+}
+
+.focus:last-child {
+    border-radius: 0 75px 75px 0;
+}
+
+.fLast {
+    border-radius: 75px;
+}
+
 .extraInfo {
     width: 85%;
     margin: auto;
@@ -122,7 +141,7 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     position: absolute;
     bottom: 0;
     left: 7.5%;

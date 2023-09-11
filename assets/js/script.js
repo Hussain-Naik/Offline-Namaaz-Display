@@ -28,6 +28,7 @@ eidTime.parentElement.setAttribute('data-type', eidNamaazTime)
 message.innerHTML += announcements;
 
 populateTimes();
+updateFocus();
 
 let isEid = checkEidDay();
 toggleEid();
@@ -59,6 +60,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 });
+
+function updateFocus() {
+	let infoItems = document.getElementsByClassName('focus');
+	if (infoItems.length == 1){
+		infoItems[0].classList.add('fLast')
+	}
+	else {
+		infoItems[0].classList.add('fFirst')
+	}
+}
 
 function populateTimes() {
 	let today = new Date();
