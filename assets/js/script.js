@@ -249,6 +249,9 @@ function inputUpdate(id, input) {
 
 function getActiveNamaaz() {
     let activeNamaaz = document.getElementsByClassName('active')[0];
+	if (activeNamaaz == undefined){
+		return false;
+	}
     return activeNamaaz;
 }
 
@@ -273,7 +276,8 @@ function checkNamaazTimer(namaaz, date) {
         namaazTime = add12Hours(namaaz.getAttribute('data-type'))
     }
     let timer = returnTimeDifference(currentTime , namaazTime)
-    if (timer < 0) {
+    
+	if (Number(timer) <= 0) {
         namaaz.classList.remove('active');
 		if (namaaz.getAttribute('id') != 'eid') {
 			namaaz.getElementsByClassName('cStart')[0].classList.replace('visible', 'hidden');
@@ -288,7 +292,10 @@ function checkNamaazTimer(namaaz, date) {
 		}
 		
     }
-    //console.log(timer)
+	else if (0 < Number(timer)  && Number(timer) < 46) {
+		namaaz.getElementsByClassName('cJamaat')[0].classList.add('countdown');
+		namaaz.getElementsByClassName('cJamaat')[0].innerHTML = timer;
+	}
 }
 
 function checkInfoTimer(info, date) {
@@ -301,7 +308,7 @@ function checkInfoTimer(info, date) {
         infoTimer = add12Hours(info.firstElementChild.getAttribute('data-type'));
     }
 	let timer = returnTimeDifference(currentTime , infoTimer);
-	if (timer < 0) {
+	if (Number(timer) <= 0) {
 		info.setAttribute('class', 'infoItems');
 		updateFocus();
 		if (info.getElementsByClassName('cXInfo')[0] != undefined) {
@@ -404,7 +411,9 @@ setInterval(() => {
 	let activeInfo = getActiveInfo();
 
     ctime.innerHTML = formatTIME12H(d);
-    checkNamaazTimer(activeNamaaz, d);
+	if (activeNamaaz != false) {
+		checkNamaazTimer(activeNamaaz, d);
+	}
 	if (activeInfo != false) {
 		checkInfoTimer(activeInfo, d);
 	}

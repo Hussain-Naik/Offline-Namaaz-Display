@@ -137,6 +137,10 @@ main {
     color: white;
 }
 
+.countdown {
+    color: red;
+}
+
 .extraInfo {
     width: 85%;
     margin: auto;
