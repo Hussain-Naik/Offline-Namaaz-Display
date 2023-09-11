@@ -17,7 +17,8 @@ const eidNamaazTime = localStorage.getItem('inputEidTime');
 const announcements = localStorage.getItem('inputAnnouncements');
 const namaazData = JSON.parse(localStorage.getItem('NamaazData'));
 const islamicDate = [ writeIslamicDate(adjustIDate) , writeIslamicDate(adjustIDate + 1) ];
-// testing const islamicDate = ['30 Ramadan 1445', '1 Shawwal 1445' ];
+//const islamicDate = ['30 Ramadan 1445', '1 Shawwal 1445' ];
+//const islamicDate = ['10 Dhul Hijja 1445', '11 Dhul Hijja 1445' ];
 
 
 cDay.innerHTML = writeDay();
@@ -285,6 +286,9 @@ function checkNamaazTimer(namaaz, date) {
 			namaaz.getElementsByClassName('nStart')[0].classList.replace('hidden', 'visible');
 			namaaz.getElementsByClassName('nJamaat')[0].classList.replace('hidden', 'visible');
 		}
+		else {
+			namaaz.classList.add('hidden');
+		}
 		if (namaaz.getAttribute('id') == 'maghrib') {
 			cIDate.innerHTML = islamicDate[1];
 			isEid = checkEidDay();
@@ -293,8 +297,15 @@ function checkNamaazTimer(namaaz, date) {
 		
     }
 	else if (Number(timer) > 0 && Number(timer) < 46) {
-		namaaz.getElementsByClassName('cJamaat')[0].classList.add('countdown');
-		namaaz.getElementsByClassName('cJamaat')[0].innerHTML = timer;
+		if (namaaz.getAttribute('id') == 'eid') {
+			console.log(namaaz)
+			namaaz.lastElementChild.classList.add('countdown');
+			namaaz.lastElementChild.innerHTML = timer;
+		}
+		else {
+			namaaz.getElementsByClassName('cJamaat')[0].classList.add('countdown');
+			namaaz.getElementsByClassName('cJamaat')[0].innerHTML = timer;
+		}
 	}
 }
 
