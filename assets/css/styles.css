@@ -212,7 +212,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     letter-spacing: .15em;
 }
 
-.inputBox input[type="submit"] {
+.inputBox a {
     border: none;
     color: #999;
     font-family: sans-serif;
@@ -224,7 +224,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     transition: .5s;
 }
 
-.inputBox input[type="submit"]:hover {
+.inputBox a:hover {
     letter-spacing: 0.35em;
     color: #708e6a;
 }

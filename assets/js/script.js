@@ -26,14 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
     main.addEventListener('click', function() {
         document.getElementById('toggle').checked = false;
     })
+	
 	let form = document.getElementById('menu');
-    form.lastElementChild.addEventListener('click', function(event) {
-        event.preventDefault()
-        let newURL = String(location.origin) + '/namaazData.html';
-        location.assign(newURL)
-        
-        
-    })
     let label = form.querySelectorAll('label').forEach(label => {
         label.innerHTML = label.innerText.split('').map(
             (letters, i) => `<span style='transition-delay: ${i * 50}ms'>${letters}</span>`
