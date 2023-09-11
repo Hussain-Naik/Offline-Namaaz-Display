@@ -16,8 +16,8 @@ const adjustIDate = localStorage.getItem('inputAdjustIDate');
 const eidNamaazTime = localStorage.getItem('inputEidTime');
 const announcements = localStorage.getItem('inputAnnouncements');
 const namaazData = JSON.parse(localStorage.getItem('NamaazData'));
-//const islamicDate = [ writeIslamicDate(adjustIDate) , writeIslamicDate(adjustIDate + 1) ];
-const islamicDate = ['30 Ramadan 1445', '1 Shawwal 1445' ];
+const islamicDate = [ writeIslamicDate(adjustIDate) , writeIslamicDate(adjustIDate + 1) ];
+//const islamicDate = ['30 Ramadan 1445', '1 Shawwal 1445' ];
 //const islamicDate = ['10 Dhul Hijja 1445', '11 Dhul Hijja 1445' ];
 
 
