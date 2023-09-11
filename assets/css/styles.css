@@ -255,6 +255,10 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     color: #fff;
 }
 
+.infoItems {
+    width: 30%;
+}
+
 #calendar {
     width: 25vh;
     text-align: center;

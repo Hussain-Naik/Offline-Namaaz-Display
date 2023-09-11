@@ -78,7 +78,7 @@ function populateTimes() {
 	let nStart = document.getElementsByClassName('nStart');
 	let nJamaat = document.getElementsByClassName('nJamaat');
 	let istiwaHTML = document.getElementById('zawaal');
-	let istiwa = returnTimeDifference(currentTimes['Sunrise'], add12Hours(currentTimes['Maghrib Start']))
+	let istiwa = convertToSeconds(add12Hours(currentTimes['Zohar Start']))
 	istiwaHTML.innerHTML = convertToTime(istiwa, -5);
 	istiwaHTML.setAttribute('data-type', convertToTime(istiwa, -5))
 	for (let i = 0; i < 5; i++) {
@@ -290,7 +290,7 @@ function convertToTime(seconds, offset) {
     let s = m % 60;
     m = Math.floor(m / 60);
     m = checkTime(m);
-    h = checkTime(h);
+    h = formatTIME12H(h);
     s = checkTime(s);
     return h + ':' + m ;
 }
@@ -312,14 +312,26 @@ function returnTimeDifference(currentTime, namaazTime) {
 }
 
 function formatTIME12H(date) {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let ampm = hours >= 12 ? 12 :0;
-    hours = hours % 12;
-    hours = hours ? hours :ampm; // the hour '0' should be '12'
-    hours = checkTime(hours);
-    minutes = checkTime(minutes);
-    let strTime = hours + ':' + minutes;
+	let hours;
+    let minutes;
+    let ampm;
+	let strTime;
+	if (typeof(date) == 'object') {
+		hours = date.getHours();
+    	minutes = date.getMinutes();
+    	ampm = hours >= 12 ? 12 :0;
+		hours = hours % 12;
+		hours = hours ? hours :ampm; // the hour '0' should be '12'
+		hours = checkTime(hours);
+		minutes = checkTime(minutes);
+		strTime = hours + ':' + minutes;
+	}
+    else {
+		hours = Number(date) - 12;
+		hours = checkTime(hours);
+		strTime = hours;
+	}
+    
     return strTime;
 }
 
