@@ -66,6 +66,10 @@ function populateTimes() {
 	let cJamaat = document.getElementsByClassName('cJamaat');
 	let nStart = document.getElementsByClassName('nStart');
 	let nJamaat = document.getElementsByClassName('nJamaat');
+	let istiwaHTML = document.getElementById('zawaal');
+	let istiwa = returnTimeDifference(currentTimes['Sunrise'], add12Hours(currentTimes['Maghrib Start']))
+	istiwaHTML.innerHTML = convertToTime(istiwa, -5);
+	istiwaHTML.setAttribute('data-type', convertToTime(istiwa, -5))
 	for (let i = 0; i < 5; i++) {
 		cStart[i].innerHTML = currentTimes[cStart[i].getAttribute('data-target')];
 		cJamaat[i].innerHTML = currentTimes[cJamaat[i].getAttribute('data-target')];
@@ -246,6 +250,23 @@ function convertToSeconds(timeParameter) {
     return sum
 }
 
+function convertToTime(seconds, offset) {
+	let total = (offset == undefined) ? seconds : seconds + (offset * 60);
+    let h = Math.floor(total / 3600);
+    let m = total % 3600;
+    let s = m % 60;
+    m = Math.floor(m / 60);
+    m = checkTime(m);
+    h = checkTime(h);
+    s = checkTime(s);
+    return h + ':' + m ;
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i;}
+    return i;
+}
+
 function mySecondsFunction(item, index, arr) {
     arr[index] = item * 3600 / (60 ** index);
     
@@ -263,8 +284,8 @@ function formatTIME12H(date) {
     let ampm = hours >= 12 ? 12 :0;
     hours = hours % 12;
     hours = hours ? hours :ampm; // the hour '0' should be '12'
-    hours = hours < 10 ? '0' + hours :hours;
-    minutes = minutes < 10 ? '0' + minutes :minutes;
+    hours = checkTime(hours);
+    minutes = checkTime(minutes);
     let strTime = hours + ':' + minutes;
     return strTime;
 }
@@ -289,7 +310,7 @@ setInterval(() => {
     let d = new Date();
     let dHours = d.getHours();
     let dMinutes = d.getMinutes();
-    let dSec = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
+    let dSec = checkTime(d.getSeconds());
     let ampm = dHours >= 12 ? 'pm' : 'am';
     let activeNamaaz = getActiveNamaaz();
 
