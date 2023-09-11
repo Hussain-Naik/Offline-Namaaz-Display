@@ -319,10 +319,12 @@ function checkInfoTimer(info, date) {
 				info.setAttribute('class', 'infoItems');
 				info.firstElementChild.classList.remove('countdown');
 				info.firstElementChild.innerHTML = info.firstElementChild.getAttribute('data-type');
+				info.lastElementChild.innerHTML = 'Istiwa';
 			}
 			else if (Number(zawaalTimer) > 0 && Number(zawaalTimer) < 600) {
 				info.firstElementChild.classList.add('countdown');
 				info.firstElementChild.innerHTML = displayZawaalTime(zawaalTimer);
+				info.lastElementChild.innerHTML = 'Zawaal in';
 			}
 		}
 		
