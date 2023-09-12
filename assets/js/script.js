@@ -86,7 +86,7 @@ function updateSlidePicker(count) {
 	let slideItems = document.getElementsByClassName('slidesOption')
 	let check = Number(count) + 3;
 	if (check > slideItems.length) {
-		makeSlideDiv()
+		makeSlideDiv('show', count)
 	}
 	else {
 		let form = document.getElementById('menu')
@@ -94,7 +94,7 @@ function updateSlidePicker(count) {
 	}
 }
 
-function makeSlideDiv(arg) {
+function makeSlideDiv(arg, x) {
 	let form = document.getElementById('menu');
 	let newDiv = document.createElement("div");
 	if (arg == 'hidden') {
@@ -106,6 +106,7 @@ function makeSlideDiv(arg) {
 	let newInput = document.createElement("input");
 	newInput.setAttribute('type', 'file')
 	newInput.setAttribute('accept' , '.jpg')
+	newInput.setAttribute('id' , 'slideImage' + x)
 	let newLabel = document.createElement("label");
 	newLabel.setAttribute('for', '')
 	newDiv.appendChild(newInput);
@@ -133,7 +134,7 @@ function clickEditSlides(arg) {
 function populateSlides() {
 	let x = document.getElementById('inputSlideCount').value;
 	for (let i = 0; i < x; i++) {
-		makeSlideDiv('hidden')
+		makeSlideDiv('hidden', i + 1)
 	}
 }
 
