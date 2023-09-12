@@ -599,6 +599,23 @@ function writeDay() {
 	return outputDay;
 }
 
+function HideSlides() {
+    let slideDiv = document.getElementById('imageSlides');
+
+    slideDiv.style.left = '-100%';
+    slideDiv.className = 'imageSlides imageHidden';
+
+}
+function ShowSlides(inc) {
+    let slideDiv = document.getElementById('imageSlides');
+	let imageSelection = document.getElementById('slideImageD'+inc).value
+
+    slideDiv.style.backgroundImage = 'url(assets/images/' + imageSelection + '.jpg)';
+
+    slideDiv.className = 'imageSlides imageVisible';
+    slideDiv.style.left = '0%';
+}
+
 setInterval(() => {
     let d = new Date();
     let dHours = d.getHours();

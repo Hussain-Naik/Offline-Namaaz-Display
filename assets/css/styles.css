@@ -341,6 +341,29 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     letter-spacing: 0;
 }
 
+.imageSlides {
+    background: black;
+    font-size: 9vw;
+    position: absolute;
+    z-index: 5;
+    left: -100%;
+    top: 0%;
+    height: 100%;
+    width: 100%;
+    color: #F4E2CE;
+    opacity: 0.95;
+}
+
+.imageHidden {
+    opacity: 0;
+    transition: all 3s ease-out;
+}
+
+.imageVisible {
+    opacity: 0.95;
+    transition: all 3s ease-out;
+}
+
 #calendar {
     width: 25vh;
     text-align: center;
