@@ -105,6 +105,7 @@ function makeSlideDiv(arg) {
 	}
 	let newInput = document.createElement("input");
 	newInput.setAttribute('type', 'file')
+	newInput.setAttribute('accept' , '.jpg')
 	let newLabel = document.createElement("label");
 	newLabel.setAttribute('for', '')
 	newDiv.appendChild(newInput);

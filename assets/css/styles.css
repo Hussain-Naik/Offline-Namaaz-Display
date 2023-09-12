@@ -282,6 +282,10 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     letter-spacing: 0.35em;
     color: #708e6a;
 }
+
+.inputBox input[type="file"] {
+    color: #999;
+}
 .inputBox label {
     position: absolute;
     left: 0;
