@@ -73,8 +73,44 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 		}
 	}
-
+	populateSlides();
 });
+
+function addSlides() {
+	let input = document.getElementById('inputSlideCount');
+	inputUpdate(input.id, input.value);
+	updateSlidePicker(input.value)
+}
+
+function updateSlidePicker(count) {
+	let slideItems = document.getElementsByClassName('slidesOption')
+	let check = Number(count) + 3;
+	if (check > slideItems.length) {
+		makeSlideDiv()
+	}
+	else {
+		let form = document.getElementById('menu')
+		form.removeChild(form.lastElementChild)
+	}
+}
+
+function makeSlideDiv(arg) {
+	let form = document.getElementById('menu');
+	let newDiv = document.createElement("div");
+	if (arg == 'hidden') {
+		newDiv.setAttribute('class', 'inputBox slidesOption hidden')
+	}
+	else {
+		newDiv.setAttribute('class', 'inputBox slidesOption visible')
+	}
+	let newInput = document.createElement("input");
+	newInput.setAttribute('type', 'file')
+	let newLabel = document.createElement("label");
+	newLabel.setAttribute('for', '')
+	newDiv.appendChild(newInput);
+	newDiv.appendChild(newLabel);
+	form.appendChild(newDiv);
+}
 
 function clickEditSlides(arg) {
 	let mainSelection = document.getElementsByClassName('mainOptions');
@@ -90,6 +126,13 @@ function clickEditSlides(arg) {
 		switchFunc(slideSelection, 'hide');
 		arg.parentElement.setAttribute('data-type', 'mainOptions');
 		arg.value = 'Edit Slides';
+	}
+}
+
+function populateSlides() {
+	let x = document.getElementById('inputSlideCount').value;
+	for (let i = 0; i < x; i++) {
+		makeSlideDiv('hidden')
 	}
 }
 
