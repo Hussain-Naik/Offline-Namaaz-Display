@@ -16,6 +16,8 @@ const iMonthNames = new Array("Muharram","Safar","Rabi'ul Awwal","Rabi'ul Akhir"
 const adjustIDate = localStorage.getItem('inputAdjustIDate');
 const eidNamaazTime = localStorage.getItem('inputEidTime');
 const announcements = localStorage.getItem('inputAnnouncements');
+const slideTimer = Number(localStorage.getItem('inputSlideTimer'));
+const slideDuration = Number(localStorage.getItem('inputSlideDuration'));
 const namaazData = JSON.parse(localStorage.getItem('NamaazData'));
 const islamicDate = [ writeIslamicDate(adjustIDate) , writeIslamicDate(adjustIDate + 1) ];
 //const islamicDate = ['30 Ramadan 1445', '1 Shawwal 1445' ];
@@ -23,6 +25,9 @@ const islamicDate = [ writeIslamicDate(adjustIDate) , writeIslamicDate(adjustIDa
 //const islamicDate = ['9 Dhul Hijja 1445', '10 Dhul Hijja 1445' ];
 //const islamicDate = ['19 Ramadan 1445', '20 Ramadan 1445' ];
 
+let timer = 0;
+let sequence = 1;
+let sEnable = true;
 
 cDay.innerHTML = writeDay();
 cDate.innerHTML = writeDate();
@@ -430,6 +435,7 @@ function checkNamaazTimer(namaaz, date) {
     let timer = returnTimeDifference(currentTime , namaazTime)
     
 	if (Number(timer) <= 0) {
+		sEnable = true
         namaaz.classList.remove('active');
 		if (namaaz.getAttribute('id') != 'eid') {
 			namaaz.getElementsByClassName('cStart')[0].classList.replace('visible', 'hidden');
@@ -451,6 +457,7 @@ function checkNamaazTimer(namaaz, date) {
 		
     }
 	else if (Number(timer) > 0 && Number(timer) < 46) {
+		sEnable = false;
 		if (namaaz.getAttribute('id') == 'eid') {
 			console.log(namaaz)
 			namaaz.lastElementChild.classList.add('countdown');
@@ -474,6 +481,7 @@ function checkInfoTimer(info, date) {
     }
 	let timer = returnTimeDifference(currentTime , infoTimer);
 	if (Number(timer) <= 0) {
+		sEnable = true;
 		if (info.firstElementChild.getAttribute('id') != 'zawaal') {
 			info.setAttribute('class', 'infoItems');
 		}
@@ -500,6 +508,7 @@ function checkInfoTimer(info, date) {
 		}
 	}
 	else if (Number(timer) > 0 && Number(timer) < 46 && info.firstElementChild.getAttribute('id') != 'zawaal') {
+		sEnable = false;
 		info.getElementsByClassName('cXInfo')[0].classList.add('countdown');
 		info.getElementsByClassName('cXInfo')[0].innerHTML = timer;
 	}
@@ -599,22 +608,33 @@ function writeDay() {
 	return outputDay;
 }
 
-function HideSlides() {
+function hideSlides() {
     let slideDiv = document.getElementById('imageSlides');
 
     slideDiv.style.left = '-100%';
     slideDiv.className = 'imageSlides imageHidden';
 
 }
-function ShowSlides(inc) {
+
+function showSlides(inc) {
     let slideDiv = document.getElementById('imageSlides');
 	let imageSelection = document.getElementById('slideImageD'+inc).value
 
-    slideDiv.style.backgroundImage = 'url(assets/images/' + imageSelection + '.jpg)';
+    slideDiv.style.backgroundImage = 'url(assets/images/' + imageSelection + ')';
 
     slideDiv.className = 'imageSlides imageVisible';
     slideDiv.style.left = '0%';
 }
+
+function incSequence() {
+	if (sequence == document.getElementById('inputSlideCount').value) {
+		sequence = 1;
+	}
+	else {
+		sequence++;
+	}
+}
+
 
 setInterval(() => {
     let d = new Date();
@@ -624,7 +644,20 @@ setInterval(() => {
     let ampm = dHours >= 12 ? 'pm' : 'am';
     let activeNamaaz = getActiveNamaaz();
 	let activeInfo = getActiveInfo();
+	if (sEnable) {
+		timer++;
+	}
 
+	
+	if (timer == slideTimer) {
+		showSlides(sequence);
+		incSequence();
+	}
+	if (timer > (slideDuration + slideTimer) || sEnable == false) {
+		hideSlides();
+		timer = -3;
+	}
+	
     ctime.innerHTML = formatTIME12H(d);
 	if (activeNamaaz != false) {
 		checkNamaazTimer(activeNamaaz, d);
