@@ -76,8 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	populateSlides();
 });
 
-function addSlides() {
-	let input = document.getElementById('inputSlideCount');
+function addSlides(input) {
 	inputUpdate(input.id, input.value);
 	updateSlidePicker(input.value)
 }
@@ -98,19 +97,22 @@ function makeSlideDiv(arg, x) {
 	let form = document.getElementById('menu');
 	let newDiv = document.createElement("div");
 	if (arg == 'hidden') {
-		newDiv.setAttribute('class', 'inputBox slidesOption hidden')
+		newDiv.setAttribute('class', 'inputBox slidesOption flexPicker hidden')
 	}
 	else {
-		newDiv.setAttribute('class', 'inputBox slidesOption visible')
+		newDiv.setAttribute('class', 'inputBox slidesOption flexPicker visible')
 	}
-	let newInput = document.createElement("input");
-	newInput.setAttribute('type', 'file')
-	newInput.setAttribute('accept' , '.jpg')
-	newInput.setAttribute('id' , 'slideImage' + x)
-	let newLabel = document.createElement("label");
-	newLabel.setAttribute('for', '')
-	newDiv.appendChild(newInput);
-	newDiv.appendChild(newLabel);
+	let newFInput = document.createElement("input");
+	newFInput.setAttribute('type', 'file')
+	newFInput.setAttribute('accept' , '.jpg')
+	newFInput.setAttribute('onchange' , 'updateInput(this)')
+	newFInput.setAttribute('id' , 'slideImage' + x)
+	let newDInput = document.createElement("input");
+	newDInput.setAttribute('type', 'text')
+	newDInput.setAttribute('id' , 'slideImageD' + x)
+	newDInput.value = localStorage.getItem('slideImage' + x);
+	newDiv.appendChild(newFInput);
+	newDiv.appendChild(newDInput);
 	form.appendChild(newDiv);
 }
 
@@ -388,6 +390,12 @@ function toggleEidNotification() {
 
 function inputUpdate(id, input) {
     localStorage.setItem(id, input)
+}
+
+function updateInput(input) {
+	let fileName = input.value.split('\\');
+    localStorage.setItem(input.id, fileName[fileName.length -1]);
+	input.nextSibling.value = fileName[fileName.length -1];
 }
 
 function getActiveNamaaz() {

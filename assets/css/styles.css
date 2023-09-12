@@ -284,7 +284,14 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 }
 
 .inputBox input[type="file"] {
-    color: #999;
+    color: transparent;
+    font-family: sans-serif;
+    letter-spacing: 0;
+    border: none;
+    padding-left: 75%;
+    font-size: 2vh;
+    position: absolute;
+    z-index: 10;
 }
 .inputBox label {
     position: absolute;
@@ -317,6 +324,21 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     line-height: 1em;
     font-size: 2.5vh;
     text-shadow: 4px 4px 10px rgba(0,0,0, 0.5);
+}
+
+.flexPicker {
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+}
+
+.flexPicker input[type="text"] {
+    width: 100%;
+    color: #999;
+    padding-right: 25%;
+    font-family: sans-serif;
+    font-size: 2.5vh;
+    letter-spacing: 0;
 }
 
 #calendar {
