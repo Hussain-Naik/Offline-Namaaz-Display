@@ -110,6 +110,7 @@ function makeSlideDiv(arg, x) {
 	let newDInput = document.createElement("input");
 	newDInput.setAttribute('type', 'text')
 	newDInput.setAttribute('id' , 'slideImageD' + x)
+	newDInput.setAttribute('disabled' , '')
 	newDInput.value = localStorage.getItem('slideImage' + x);
 	newDiv.appendChild(newFInput);
 	newDiv.appendChild(newDInput);
