@@ -66,9 +66,43 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         }
+		else{
+			input.addEventListener('click', function(event) {
+                event.preventDefault();
+				clickEditSlides(this);
+            });
+		}
 	}
 
 });
+
+function clickEditSlides(arg) {
+	let mainSelection = document.getElementsByClassName('mainOptions');
+	let slideSelection = document.getElementsByClassName('slidesOption');
+	if(arg.parentElement.getAttribute('data-type') == 'mainOptions') {
+		switchFunc(mainSelection, 'hide');
+		switchFunc(slideSelection, 'show');
+		arg.parentElement.setAttribute('data-type', 'slidesOption');
+		arg.value = 'Back';
+	}
+	else {
+		switchFunc(mainSelection, 'show');
+		switchFunc(slideSelection, 'hide');
+		arg.parentElement.setAttribute('data-type', 'mainOptions');
+		arg.value = 'Edit Slides';
+	}
+}
+
+function switchFunc(selection, type) {
+	for (let i = 0; i < selection.length; i++) {
+		if (type == 'hide') {
+			selection[i].classList.replace('visible', 'hidden')
+		}
+		else {
+			selection[i].classList.replace('hidden', 'visible')
+		}
+	}
+}
 
 function updateFocus() {
 	let infoItems = document.getElementsByClassName('focus');

@@ -19,32 +19,35 @@
             <span class="bar"></span>
         </label>
         <form id="menu">
-            <div class="inputBox">
+            <div class="inputBox mainOptions visible">
                 <input type="number" id="inputAdjustIDate">
                 <label for="">Adjust Islamic date</label>
             </div>
-            <div class="inputBox">
+            <div class="inputBox mainOptions visible">
                 <input type="text" id="inputAnnouncements">
                 <label for="">Announcements</label>
             </div>
-            <div class="inputBox">
+            <div class="inputBox mainOptions visible">
                 <input type="text" id="inputEidTime">
                 <label for="">Eid Namaaz Time</label>
             </div>
-            <div class="inputBox">
+            <div class="inputBox mainOptions visible">
+                <a href="namaazData.html">Edit Times</a>
+            </div>
+            <div class="inputBox" data-type="mainOptions">
+                <input type="submit" value="Edit Slides">
+            </div>
+            <div class="inputBox slidesOption hidden">
                 <input type="number" id="inputSlideCount">
                 <label for="">Slide Count</label>
             </div>
-            <div class="inputBox">
+            <div class="inputBox slidesOption hidden">
                 <input type="number" id="inputSlideTimer">
                 <label for="">Slide Timer</label>
             </div>
-            <div class="inputBox">
+            <div class="inputBox slidesOption hidden">
                 <input type="number" id="inputSlideDuration">
                 <label for="">Slide Duration</label>
-            </div>
-            <div class="inputBox">
-                <a href="namaazData.html">Edit Times</a>
             </div>
             </form>
     </header>
