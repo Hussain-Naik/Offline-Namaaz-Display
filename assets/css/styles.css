@@ -285,6 +285,13 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     width: 32%;
 }
 
+.eidCountDown {
+    width: 90%;
+    line-height: 1em;
+    font-size: 2.5vh;
+    text-shadow: 4px 4px 10px rgba(0,0,0, 0.5);
+}
+
 #calendar {
     width: 25vh;
     text-align: center;

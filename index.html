@@ -83,7 +83,7 @@
             <div data-target="Fajr Jamaat" class="digitalClock nJamaat hidden"></div>
         </div>
         <div class="displayTimes active" id="eid" data-type="">
-            <div class="namaazName">EID</div>
+            <div class="eidName">EID</div>
             <div id="eidStart" class="digitalClock"></div>
             <div id="eidJamaat" class="digitalClock"></div>
         </div>
@@ -116,8 +116,9 @@
             <div data-target="Isha Jamaat" class="digitalClock nJamaat hidden"></div>
         </div>
         
-        <div class="displayTimes hidden" id="tubeEC">
-            <div id="T_EID" class="eidCountDown">EID</div>
+        <div class="displayTimes active" id="eidNotice">
+            <div class="eidCountDown"><span id="remainingDays"></span> Days Remaining for <span class="eidName"></span> Salah at</div>
+            <div id="eidTime" class="digitalClock"></div>
 
         </div>
         <!-- ADDITIONAL INFO DISPLAY -->

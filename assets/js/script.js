@@ -4,7 +4,8 @@ let cAMPM = document.getElementById("ampm");
 let cDay = document.getElementById("day");
 let cDate = document.getElementById("date");
 let cIDate = document.getElementById("hijri");
-let eidTime = document.getElementById("eidJamaat");
+let eidJamaat = document.getElementById("eidJamaat");
+let eidTime = document.getElementById("eidTime");
 let message = document.getElementById("announcements");
 
 //const wdNames = new Array("Ahad","Ithnin","Thulatha","Arbaa","Khams","Jumuah","Sabt");
@@ -19,20 +20,27 @@ const namaazData = JSON.parse(localStorage.getItem('NamaazData'));
 const islamicDate = [ writeIslamicDate(adjustIDate) , writeIslamicDate(adjustIDate + 1) ];
 //const islamicDate = ['30 Ramadan 1445', '1 Shawwal 1445' ];
 //const islamicDate = ['10 Dhul Hijja 1445', '11 Dhul Hijja 1445' ];
+//const islamicDate = ['9 Dhul Hijja 1445', '10 Dhul Hijja 1445' ];
+//const islamicDate = ['19 Ramadan 1445', '20 Ramadan 1445' ];
 
 
 cDay.innerHTML = writeDay();
 cDate.innerHTML = writeDate();
 cIDate.innerHTML = islamicDate[0];
+eidJamaat.innerHTML = eidNamaazTime;
+eidJamaat.parentElement.setAttribute('data-type', eidNamaazTime)
 eidTime.innerHTML = eidNamaazTime;
-eidTime.parentElement.setAttribute('data-type', eidNamaazTime)
 message.innerHTML += announcements;
 
 populateTimes();
 updateFocus();
 
+displayEidName();
+
 let isEid = checkEidDay();
 toggleEid();
+let isEidCounter = checkEidCountdown();
+toggleEidNotification();
 
 document.addEventListener("DOMContentLoaded", function() {
     let main = document.querySelector('main');
@@ -223,15 +231,56 @@ function writeIslamicDate(adjustment) {
 	return outputIslamicDate;
 }
 
+function returnIslamicDate(arg) {
+	let outputIslamicDate = cIDate.innerHTML.slice(0, -5);
+	let separator = outputIslamicDate.indexOf(' ');
+	let iDate = outputIslamicDate.slice(0 , separator);
+	let iMonth = outputIslamicDate.slice(separator + 1);
+	if (arg == 'month') {
+		return iMonth;
+	}
+	else if (arg == 'day') {
+		return iDate
+	}
+	else {
+		return outputIslamicDate
+	}
+}
+
 function checkEidDay() {
 	let bool1 = false;
 	let bool2 = false;
 	let bool = false;
-	let outputIslamicDate = cIDate.innerHTML.slice(0, -5)
-	bool1 = outputIslamicDate == "10 Dhul Hijja" ? true : false;
-	bool2 = outputIslamicDate == "1 Shawwal" ? true : false;
+	bool1 = returnIslamicDate() == "10 Dhul Hijja" ? true : false;
+	bool2 = returnIslamicDate() == "1 Shawwal" ? true : false;
 	bool = bool1 || bool2 ? true : false;
 	return bool;
+}
+
+function checkEidCountdown() {
+	let bool1 = false;
+	let bool2 = false;
+	let bool = false;
+	let iDate = returnIslamicDate('day');
+	let iMonth = returnIslamicDate('month');
+	bool1 = iDate <= 9 && iMonth == "Dhul Hijja" ? true : false;
+	bool2 = String(iDate).slice(0,1) > 1 && iMonth == "Ramadan" ? true : false;
+	bool = bool1 || bool2 ? true : false;
+	return bool;
+}
+
+function displayRemainingDays() {
+	let eidR = returnIslamicDate('month') == "Ramadan" ? 31 - returnIslamicDate('day') : 10 - returnIslamicDate('day');
+	return eidR;
+}
+
+function displayEidName() {
+	let eidName = document.getElementsByClassName('eidName');
+
+	let eid = returnIslamicDate('month') == "Ramadan" || returnIslamicDate('month') == "Shawwal" ? "EID UL-FITRA" : "EID UL-ADHA";
+	
+	eidName[0].innerHTML = eid;
+	eidName[1].innerHTML = eid;
 }
 
 function toggleEid() {
@@ -244,6 +293,20 @@ function toggleEid() {
 	}
 	
 }
+
+function toggleEidNotification() {
+	let eidHTML = document.getElementById('eidNotice');
+	let eidCounter = document.getElementById('remainingDays')
+	if (isEidCounter == true) {
+		eidHTML.classList.replace('hidden', 'active')
+		eidCounter.innerHTML = displayRemainingDays();
+	}
+	else {
+		eidHTML.classList.replace('active', 'hidden')
+	}
+	
+}
+
 function inputUpdate(id, input) {
     localStorage.setItem(id, input)
 }
@@ -294,6 +357,8 @@ function checkNamaazTimer(namaaz, date) {
 			cIDate.innerHTML = islamicDate[1];
 			isEid = checkEidDay();
 			toggleEid();
+			isEidCounter = checkEidCountdown();
+			toggleEidNotification();
 		}
 		
     }
