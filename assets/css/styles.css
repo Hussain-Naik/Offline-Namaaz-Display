@@ -101,6 +101,7 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    transition: all .5s;
 }
 
 .eNotice {
@@ -234,9 +235,10 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 
 .inputBox {
     position: relative;
-    width: 300px;
-    margin-bottom: 40px;
+    width: 70%;
+    margin-bottom: 5vh;
     margin-left: 10px;
+    font-size: 2.5vh;
 }
 
 .inputBox input {
@@ -249,7 +251,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     border-bottom: 2px solid #999;
     outline: none;
     color: transparent;
-    font-size: 1em;
+    font-size: 3vh;
     text-transform: uppercase;
     letter-spacing: .15em;
 }
