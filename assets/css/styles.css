@@ -133,6 +133,11 @@ main {
     color: white;
 }
 
+.infoItems {
+    width: 32%;
+    transition: all .8s;
+}
+
 .focus {
     opacity: 1;
     background-color: #000000ae;
@@ -141,6 +146,8 @@ main {
 
 .fFirst {
     border-radius: 75px 0 0 75px;
+    transition-delay: 2s;
+    transition: all .8s;
 }
 
 .focus:last-child {
@@ -152,6 +159,8 @@ main {
     opacity: 1;
     background-color: #000000ae;
     color: white;
+    transition-delay: 2s;
+    transition: all .8s;
 }
 
 .countdown {
@@ -297,10 +306,6 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 .inputBox input:focus {
     border-bottom: 2px solid #708e6a;
     color: #fff;
-}
-
-.infoItems {
-    width: 32%;
 }
 
 .eidCountDown {
