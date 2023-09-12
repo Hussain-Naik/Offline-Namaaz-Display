@@ -99,6 +99,18 @@ main {
     justify-content: space-around;
 }
 
+.eNotice {
+    width: 85%;
+    margin: auto;
+    height: 9%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+
+}
+
 .displayTimes .digitalClock, .sJTitle {
     width: 19%;
     text-align: center;
@@ -286,7 +298,6 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 }
 
 .eidCountDown {
-    width: 90%;
     line-height: 1em;
     font-size: 2.5vh;
     text-shadow: 4px 4px 10px rgba(0,0,0, 0.5);
