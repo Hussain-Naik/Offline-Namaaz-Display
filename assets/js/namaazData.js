@@ -2,6 +2,7 @@ const iDayNames = new Array("sunday", "monday", "tuesday", "wednesday", "thursda
 
 window.onload = () => {
     loopMonths(0);
+    calendarBefore();
     var reader = new FileReader(),
         picker = document.getElementById("picker");
 
@@ -40,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
         month.innerHTML = monthNames[incMonth];
         resetCalendar();
         loopMonths(incMonth);
+        calendarBefore();
     })
 
     nextMonth.addEventListener('click', function() {
@@ -48,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
         month.innerHTML = monthNames[incMonth];
         resetCalendar();
         loopMonths(incMonth);
+        calendarBefore();
         
     })
 
@@ -77,7 +80,7 @@ function loopMonths(month) {
         
         if (Number(loopDate.getMonth()) <= month) {
             insert.innerHTML = d;
-            insert.classList.add('available');
+            insert.classList.replace('available', 'current');
             insert.classList.add('week');
             insert.classList.add('month');
             insert.classList.replace('week', 'week' + inc);
@@ -90,18 +93,36 @@ function loopMonths(month) {
     }
 }
 
-function fillRemainingCalendar() {
-    let fistCalendarItem = document.getElementsByClassName('card dates available week1')[0];
-    let offset = iDayNames.indexOf(fistCalendarItem.parentElement.id) + 2;
-    for (;offset > 0; offset--){
+function calendarBefore() {
+    let fistCalendarItem = document.getElementsByClassName('card dates current week1')[0];
+    let offset = Number(fistCalendarItem.parentElement.getAttribute('data-offset'));
+    let m = document.getElementById('currentM').getAttribute('data-type');
+    let y = new Date().getFullYear();
+    let dateString = y + '/' + (Number(m)+1) +'/01';
+    let offsetParent = fistCalendarItem.parentElement;
+    for (let i = 1;i < offset + 1; i++){
         console.log(offset)
+        offsetParent = offsetParent.previousElementSibling;
+        offsetParent.children[1].innerHTML = getDateByOffset(dateString, -i)
     }
 }
 
+function getDateByOffset(start, offset) {
+	var date = new Date(start || Date.now());
+	var n = Number(offset);
+
+	if (n !== n || date.toString() == "Invalid Date") { return date; }
+
+	date.setDate(date.getDate() + n);
+
+	let d = date.getDate();
+	let dateString = d;
+  return dateString;
+}
 function resetCalendar() {
     let calendarItems = document.getElementsByClassName('dates');
     for (let i = 0; i < calendarItems.length; i++) {
         calendarItems[i].innerHTML = '';
-        calendarItems[i].setAttribute('class', 'card dates week month')
+        calendarItems[i].setAttribute('class', 'card dates available')
     }
 }
