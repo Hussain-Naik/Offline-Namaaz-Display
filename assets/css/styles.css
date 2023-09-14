@@ -365,9 +365,10 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 }
 
 #calendar {
-    width: 25vh;
+    width: 30vh;
     text-align: center;
     margin: 1vh auto;
+    font-size: 2.5vh;
 }
 .dFRows {
     display: flex;
@@ -382,12 +383,21 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 }
 
 .card {
-    width: 3vh;
-    height: 3vh;
-    background-color: #708e6a;
+    width: 3.5vh;
+    height: 3.5vh;
+    background-color: #fff;
 }
 
 .mButton {
-    width: 3vh;
-    height: 3vh;
+    width: 3.5vh;
+    height: 3.5vh;
+}
+
+.available {
+    background-color: #99999977;
+    color: #0000004e;
+}
+
+.current {
+    background-color: #999;
 }
