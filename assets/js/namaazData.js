@@ -101,7 +101,6 @@ function calendarBefore() {
     let dateString = y + '/' + (Number(m)+1) +'/01';
     let offsetParent = fistCalendarItem.parentElement;
     for (let i = 1;i < offset + 1; i++){
-        console.log(offset)
         offsetParent = offsetParent.previousElementSibling;
         offsetParent.children[1].innerHTML = getDateByOffset(dateString, -i)
     }
