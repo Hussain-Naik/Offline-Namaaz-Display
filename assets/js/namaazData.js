@@ -3,6 +3,7 @@ const iDayNames = new Array("sunday", "monday", "tuesday", "wednesday", "thursda
 window.onload = () => {
     loopMonths(0);
     calendarBefore();
+    calendarAfter();
     var reader = new FileReader(),
         picker = document.getElementById("picker");
 
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
         resetCalendar();
         loopMonths(incMonth);
         calendarBefore();
+        calendarAfter();
     })
 
     nextMonth.addEventListener('click', function() {
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
         resetCalendar();
         loopMonths(incMonth);
         calendarBefore();
+        calendarAfter();
         
     })
 
@@ -108,6 +111,16 @@ function calendarBefore() {
 function calendarAfter() {
     let indexLast = document.getElementById('friday').getElementsByClassName('current').length - 1;
     let lastCalItem = document.getElementById('friday').getElementsByClassName('current')[indexLast];
+    let indexChildren = Number(lastCalItem.getAttribute('data-child'));
+    let offsetParent = lastCalItem.parentElement;
+    let dateInc = 1;
+    for (let i = 0; i < 6; i++) {
+        offsetParent = offsetParent.nextElementSibling;
+        if (offsetParent.children[indexChildren].classList.length == 3){
+            offsetParent.children[indexChildren].innerHTML = dateInc;
+            dateInc++
+        }
+    }
 }
 
 function getDateByOffset(start, offset) {
