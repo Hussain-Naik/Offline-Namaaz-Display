@@ -105,6 +105,10 @@ function calendarBefore() {
         offsetParent.children[1].innerHTML = getDateByOffset(dateString, -i)
     }
 }
+function calendarAfter() {
+    let indexLast = document.getElementById('friday').getElementsByClassName('current').length - 1;
+    let lastCalItem = document.getElementById('friday').getElementsByClassName('current')[indexLast];
+}
 
 function getDateByOffset(start, offset) {
 	var date = new Date(start || Date.now());
