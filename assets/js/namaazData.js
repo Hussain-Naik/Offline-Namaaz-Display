@@ -1,3 +1,5 @@
+const iDayNames = new Array("sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday");
+
 window.onload = () => {
     loopMonths(0);
     var reader = new FileReader(),
@@ -64,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function loopMonths(month) {
-    let iDayNames = new Array("sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday");
     let currentDate = new Date();
     let m = month + 1;
     let d = 1;
@@ -73,14 +74,27 @@ function loopMonths(month) {
     while (d <= 31) {
         loopDate = new Date(currentDate.getFullYear() + '/' + m + '/' + d);
         let insert = document.getElementById(iDayNames[loopDate.getDay()]).getElementsByClassName('card')[inc];
-        if (loopDate.getDay() == 0) {
-            inc++;
-        }
+        
         if (Number(loopDate.getMonth()) <= month) {
             insert.innerHTML = d;
             insert.classList.add('available');
+            insert.classList.add('week');
+            insert.classList.add('month');
+            insert.classList.replace('week', 'week' + inc);
+            insert.classList.replace('month', 'month' + month);
+        }
+        if (loopDate.getDay() == 4) {
+            inc++;
         }
         d++;
+    }
+}
+
+function fillRemainingCalendar() {
+    let fistCalendarItem = document.getElementsByClassName('card dates available week1')[0];
+    let offset = iDayNames.indexOf(fistCalendarItem.parentElement.id) + 2;
+    for (;offset > 0; offset--){
+        console.log(offset)
     }
 }
 
@@ -88,5 +102,6 @@ function resetCalendar() {
     let calendarItems = document.getElementsByClassName('dates');
     for (let i = 0; i < calendarItems.length; i++) {
         calendarItems[i].innerHTML = '';
+        calendarItems[i].setAttribute('class', 'card dates week month')
     }
 }
