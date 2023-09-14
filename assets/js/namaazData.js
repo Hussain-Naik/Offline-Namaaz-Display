@@ -106,6 +106,7 @@ function calendarBefore() {
     for (let i = 1;i < offset + 1; i++){
         offsetParent = offsetParent.previousElementSibling;
         offsetParent.children[1].innerHTML = getDateByOffset(dateString, -i)
+        offsetParent.children[1].classList.add('week1');
     }
 }
 function calendarAfter() {
@@ -118,6 +119,7 @@ function calendarAfter() {
         offsetParent = offsetParent.nextElementSibling;
         if (offsetParent.children[indexChildren].classList.length == 3){
             offsetParent.children[indexChildren].innerHTML = dateInc;
+            offsetParent.children[indexChildren].classList.add('week'+ indexChildren);
             dateInc++
         }
     }
