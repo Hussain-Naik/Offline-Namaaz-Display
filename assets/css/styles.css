@@ -401,3 +401,23 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 .current {
     background-color: #999;
 }
+
+#cHeadings, .dRow {
+    display: flex;
+    width: 100%
+}
+
+.cTitle {
+    width: 45px;
+    margin: 2px;
+    font-size: 1.5vh;
+}
+.dRow input {
+    width: 45px;
+    margin: 1px;
+    font-size: 2vh;
+}
+.dRow input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+}
