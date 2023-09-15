@@ -83,7 +83,7 @@ function loopMonths(month) {
         
         if (Number(loopDate.getMonth()) <= month) {
             insert.innerHTML = d;
-            insert.classList.replace('available', 'current');
+            insert.classList.replace('hidden', 'current');
             insert.classList.add('week');
             insert.classList.add('month');
             insert.classList.replace('week', 'week' + inc);
@@ -106,6 +106,7 @@ function calendarBefore() {
     for (let i = 1;i < offset + 1; i++){
         offsetParent = offsetParent.previousElementSibling;
         offsetParent.children[1].innerHTML = getDateByOffset(dateString, -i)
+        offsetParent.children[1].classList.replace('hidden', 'available');
         offsetParent.children[1].classList.add('week1');
     }
 }
@@ -119,6 +120,7 @@ function calendarAfter() {
         offsetParent = offsetParent.nextElementSibling;
         if (offsetParent.children[indexChildren].classList.length == 3){
             offsetParent.children[indexChildren].innerHTML = dateInc;
+            offsetParent.children[indexChildren].classList.replace('hidden', 'available');
             offsetParent.children[indexChildren].classList.add('week'+ indexChildren);
             dateInc++
         }
@@ -141,6 +143,6 @@ function resetCalendar() {
     let calendarItems = document.getElementsByClassName('dates');
     for (let i = 0; i < calendarItems.length; i++) {
         calendarItems[i].innerHTML = '';
-        calendarItems[i].setAttribute('class', 'card dates available')
+        calendarItems[i].setAttribute('class', 'card dates hidden')
     }
 }
