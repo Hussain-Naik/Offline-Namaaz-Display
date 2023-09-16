@@ -288,7 +288,7 @@ function populateData() {
     }
 }
 
-function myfunction(arg) {
+function weekSelector(arg) {
     resetSelection()
     let selection = arg.classList[3];
     let nSelection = document.getElementsByClassName(selection);
