@@ -12,6 +12,7 @@ window.onload = () => {
     calendarAfter();
     setCalendarTarget();
     populateDataInput();
+    inputListeners()
     
     weekSelector()
     var reader = new FileReader(),
@@ -42,7 +43,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let month = document.getElementById('currentM');
     let nextMonth = document.getElementById('nextM');
     let selection = document.getElementById('select');
-    let items = document.getElementsByClassName('dates')
+    
+    
 
     previousMonth.addEventListener('click', function() {
         let incMonth = Number(month.getAttribute('data-type')) < 1 ? 11 : Number(month.getAttribute('data-type')) - 1
@@ -77,8 +79,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         weekSelector()
         updateSelector()
-        
     })
+
+    
 });
 function updateCalendar(arg) {
     let month = document.getElementById('currentM');
@@ -386,5 +389,30 @@ function selectAllData() {
     let dSelection = document.getElementById('data').querySelectorAll('div');
     for (let i = 0; i < dSelection.length; i++) {
         dSelection[i].classList.replace('hidden', 'dActive')
+    }
+}
+
+function inputListeners() {
+    let dChildren = document.getElementById('data').children
+    for (let dChild of dChildren) {
+        let items = dChild.querySelectorAll('input')
+        for (let item of items) {
+            item.addEventListener('focusout', function() {
+                let object = {};
+                let date = this.parentElement.id +'/'+ currentYear
+                let cItems = this.parentElement.children;
+                for (let cItem of cItems) {
+                    if(cItem.id == 'Date') {
+                        object[cItem.id] = date
+                    }
+                    else {
+                        object[cItem.id] = cItem.value
+                    }
+                    
+                }
+                NamaazData[date] = object
+                localStorage.setItem('NamaazData', JSON.stringify(NamaazData))
+            })
+        }
     }
 }
