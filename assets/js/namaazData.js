@@ -12,8 +12,8 @@ window.onload = () => {
     calendarAfter();
     setCalendarTarget();
     populateDataInput();
-    let sWeek = document.getElementById('friday').children[1];
-    weekSelector(sWeek)
+    
+    weekSelector()
     var reader = new FileReader(),
         picker = document.getElementById("picker");
 
@@ -52,8 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
         calendarBefore();
         calendarAfter();
         setCalendarTarget();
-        let sWeek = document.getElementById('friday').children[1];
-        weekSelector(sWeek)
+        weekSelector()
     })
 
     nextMonth.addEventListener('click', function() {
@@ -64,8 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
         calendarBefore();
         calendarAfter();
         setCalendarTarget();
-        let sWeek = document.getElementById('friday').children[1];
-        weekSelector(sWeek)
+        weekSelector()
     })
 
     selection.addEventListener('click', function() {
@@ -77,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
         else {
             child.nextElementSibling.classList.replace('hidden', 'visible');
         }
-        
+        weekSelector()
         
     })
 });
@@ -121,7 +119,7 @@ function setCalendarTarget() {
         m = m == 0 ? 12: m;
         days = days < 10 ? '0' + days : days;
         m = m < 10 ? '0' + m : m;
-        items[i].setAttribute('id', days +'/'+ m);
+        items[i].setAttribute('data-target', days +'/'+ m);
     }
 
 }
@@ -295,19 +293,61 @@ function populateData() {
 }
 
 function weekSelector(arg) {
-    resetSelection()
-    let selection = arg.classList[3];
-    let nSelection = document.getElementsByClassName(selection);
-    for (let nItem of nSelection) {
-        nItem.classList.add('selected')
+    resetMonth()
+    let sType = document.getElementById('select').getElementsByClassName('visible')[0].getAttribute('data-type');
+    if (sType == 'week') {
+        resetSelection()
+        if (arg == undefined) {
+            arg = document.getElementById('friday').children[1];
+        }
+        let selection = arg.classList[3];
+        let nSelection = document.getElementsByClassName(selection);
+        for (let nItem of nSelection) {
+            nItem.classList.add('selected')
+        }
+        resetDataSelection()
+        let dSelect = document.getElementsByClassName('selected')[0].getAttribute('data-target')
+        let dataSelection = document.getElementsByClassName(dSelect);
+        for (let dItem of dataSelection) {
+            dItem.classList.replace('hidden', 'dActive')
+        }
     }
-    resetDataSelection()
-    let dSelect = document.getElementsByClassName('selected')[0].getAttribute('id')
-    let dataSelection = document.getElementsByClassName(dSelect);
-    for (let dItem of dataSelection) {
-        dItem.classList.replace('hidden', 'dActive')
+    else if(sType == 'month') {
+        monthSelector()
+        resetDataSelection()
+        let mSelectStart = document.getElementsByClassName('selected')[0].getAttribute('data-target')
+        let mSelectRange = document.getElementsByClassName('selected').length
+        let dStart = document.getElementById(mSelectStart);
+        dStart.classList.replace('hidden', 'dActive')
+        let temp = dStart.nextElementSibling;
+        for (let i = 1; i < mSelectRange ; i++){
+            temp.classList.replace('hidden', 'dActive');
+            temp = temp.nextElementSibling
+        }
+    }
+    else {
+        resetDataSelection()
+        selectAllData()
     }
 
+}
+
+function monthSelector() {
+    let mSelect = document.getElementById('calendarDates').getElementsByClassName('current')
+    let aSelect = document.getElementById('calendarDates').getElementsByClassName('available')
+    for (let item of mSelect) {
+        item.classList.add('selected')
+    }
+    for (let item of aSelect) {
+        item.classList.add('selected')
+    }
+}
+
+function resetMonth() {
+    let pSelection = document.getElementById('calendarDates').getElementsByClassName('dates');
+    for (let i = 0; i < pSelection.length; i++) {
+        pSelection[i].classList.remove('selected')
+    }
 }
 
 function resetSelection() {
@@ -322,12 +362,15 @@ function resetSelection() {
 }
 
 function resetDataSelection() {
-    let dSelection = document.getElementsByClassName('dActive')[0]
-    if (dSelection != undefined) {
-        let selection = dSelection.classList[2];
-        let rSelection = document.getElementsByClassName(selection);
-        for (let nItem of rSelection) {
-            nItem.classList.replace('dActive', 'hidden')
-        }
+    let dSelection = document.getElementById('data').querySelectorAll('div');
+    for (let i = 0; i < dSelection.length; i++) {
+        dSelection[i].classList.replace('dActive', 'hidden')
+    }
+}
+
+function selectAllData() {
+    let dSelection = document.getElementById('data').querySelectorAll('div');
+    for (let i = 0; i < dSelection.length; i++) {
+        dSelection[i].classList.replace('hidden', 'dActive')
     }
 }
