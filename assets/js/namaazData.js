@@ -8,6 +8,7 @@ window.onload = () => {
     loopMonths(0);
     calendarBefore();
     calendarAfter();
+    populateDataInput();
     var reader = new FileReader(),
         picker = document.getElementById("picker");
 
