@@ -13,7 +13,7 @@ const iMonthNames = new Array("Muharram","Safar","Rabi'ul Awwal","Rabi'ul Akhir"
 "Jumadal Awwal","Jumadal Akhir","Rajab","Sha'ban",
 "Ramadan","Shawwal","Dhul Qa'ada","Dhul Hijja");
 
-const adjustIDate = localStorage.getItem('inputAdjustIDate');
+const adjustIDate = Number(localStorage.getItem('inputAdjustIDate'));
 const eidNamaazTime = localStorage.getItem('inputEidTime');
 const announcements = localStorage.getItem('inputAnnouncements');
 const slideTimer = Number(localStorage.getItem('inputSlideTimer'));
