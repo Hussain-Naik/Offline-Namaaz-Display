@@ -46,6 +46,7 @@ let isEid = checkEidDay();
 toggleEid();
 let isEidCounter = checkEidCountdown();
 toggleEidNotification();
+checkJummah();
 
 document.addEventListener("DOMContentLoaded", function() {
     let main = document.querySelector('main');
@@ -453,6 +454,7 @@ function checkNamaazTimer(namaaz, date) {
 			toggleEid();
 			isEidCounter = checkEidCountdown();
 			toggleEidNotification();
+			checkJummah();
 		}
 		
     }
@@ -590,6 +592,17 @@ function formatTIME12H(date) {
 	}
     
     return strTime;
+}
+
+function checkJummah() {
+	let day = writeDate();
+	let jummah = document.getElementById('zohar').firstElementChild
+	if (day == 'Thursday') {
+		jummah.innerHTML = 'JUMMAH';
+	}
+	else {
+		jummah.innerHTML = 'ZOHAR';
+	}
 }
 
 function writeDate() {
