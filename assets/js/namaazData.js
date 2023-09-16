@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
             child.nextElementSibling.classList.replace('hidden', 'visible');
         }
         weekSelector()
+        updateSelector()
         
     })
 });
@@ -292,6 +293,19 @@ function populateData() {
     }
 }
 
+function updateSelector() {
+    let mCalendar = document.getElementById('calendarMonth')
+    let dCalendar = document.getElementById('calendarDates')
+    let sType = document.getElementById('select').getElementsByClassName('visible')[0].getAttribute('data-type');
+    if (sType == 'all') {
+        mCalendar.classList.add('hidden');
+        dCalendar.classList.add('hidden');
+    }
+    else {
+        mCalendar.classList.remove('hidden');
+        dCalendar.classList.remove('hidden');
+    }
+}
 function weekSelector(arg) {
     resetMonth()
     let sType = document.getElementById('select').getElementsByClassName('visible')[0].getAttribute('data-type');
