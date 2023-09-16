@@ -1,4 +1,8 @@
 const iDayNames = new Array("sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday");
+const FridayOffset = new Array(2, 3, 4, 5, 6, 0, 1);
+const AfterOffset = new Array(4, 3, 2, 1, 0, 6, 5);
+const NamaazData = JSON.parse(localStorage.getItem('NamaazData'));
+const currentYear = new Date().getFullYear();
 
 window.onload = () => {
     loopMonths(0);
@@ -105,7 +109,7 @@ function calendarBefore() {
     let offsetParent = fistCalendarItem.parentElement;
     for (let i = 1;i < offset + 1; i++){
         offsetParent = offsetParent.previousElementSibling;
-        offsetParent.children[1].innerHTML = getDateByOffset(dateString, -i)
+        offsetParent.children[1].innerHTML = getOffsetDateD(dateString, -i)
         offsetParent.children[1].classList.replace('hidden', 'available');
         offsetParent.children[1].classList.add('week1');
     }
@@ -134,15 +138,127 @@ function getDateByOffset(start, offset) {
 	if (n !== n || date.toString() == "Invalid Date") { return date; }
 
 	date.setDate(date.getDate() + n);
+  return date;
+}
 
-	let d = date.getDate();
+function getOffsetDateD(start, offset) {
+    let date = getDateByOffset(start, offset);
+    let d = date.getDate();
 	let dateString = d;
   return dateString;
+}
+
+function getOffsetDateDM(start, offset) {
+    let date = getDateByOffset(start, offset);
+    let d = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+	let m = (date.getMonth() + 1);
+	m = m < 10 ? '0' + m : m;
+	let dateString = d + '/' + m;
+  return dateString;
+
 }
 function resetCalendar() {
     let calendarItems = document.getElementsByClassName('dates');
     for (let i = 0; i < calendarItems.length; i++) {
         calendarItems[i].innerHTML = '';
         calendarItems[i].setAttribute('class', 'card dates hidden')
+    }
+}
+
+function populateDataInput() {
+    let html = document.getElementById('data');
+    for (let i = 1; i < 367; i++){
+        let valueInc = getOffsetDateDM('2023/01/01', i);
+        if(valueInc == '01/01') {
+            break
+        }
+        else {
+            let insert = document.createElement('div');
+            insert.innerHTML = `
+            <input id="Date" type="text" disabled value="`+ valueInc +`">
+            <input id="Sehri End" type="time">
+            <input id="Fajr Start" type="time">
+            <input id="Fajr Jamaat" type="time">
+            <input id="Sunrise" type="time">
+            <input id="Zohar Start" type="time">
+            <input id="Zohar Jamaat" type="time">
+            <input id="Asar Start" type="time">
+            <input id="Asar Jamaat" type="time">
+            <input id="Maghrib Start" type="time">
+            <input id="Maghrib Jamaat" type="time">
+            <input id="Isha Start" type="time">
+            <input id="Isha Jamaat" type="time">`;
+            insert.setAttribute('id', valueInc);
+            insert.setAttribute('class', 'dRow');
+            html.appendChild(insert);
+        }
+    }
+    populateLoopDataInput();
+    populateData();
+}
+
+function populateLoopDataInput() {
+    let pDate = new Date(currentYear +'/01/01')
+    let aDate = new Date(currentYear +'/12/31')
+    let html = document.getElementById('data');
+    
+    let countP = FridayOffset[pDate.getDay()];
+    let countA = AfterOffset[aDate.getDay()];
+    for (let i = 0;i < countP ; i++){
+        let x = (i + 1)* -1;
+        let valueInc = getOffsetDateDM('2023/01/01', x);
+        let insert = document.createElement('div');
+        insert.innerHTML = `
+            <input id="Date" type="text" disabled value="`+ valueInc +`">
+            <input id="Sehri End" type="time">
+            <input id="Fajr Start" type="time">
+            <input id="Fajr Jamaat" type="time">
+            <input id="Sunrise" type="time">
+            <input id="Zohar Start" type="time">
+            <input id="Zohar Jamaat" type="time">
+            <input id="Asar Start" type="time">
+            <input id="Asar Jamaat" type="time">
+            <input id="Maghrib Start" type="time">
+            <input id="Maghrib Jamaat" type="time">
+            <input id="Isha Start" type="time">
+            <input id="Isha Jamaat" type="time">`;
+            insert.setAttribute('id', valueInc);
+            insert.setAttribute('class', 'dRow');
+        html.insertBefore(insert, html.children[0])
+    }
+    for (let y = 1; y < countA +1; y++) {
+        let valueInc = getOffsetDateDM('2023/12/31', y);
+        let insert = document.createElement('div');
+        insert.innerHTML = `
+            <input id="Date" type="text" disabled value="`+ valueInc +`">
+            <input id="Sehri End" type="time">
+            <input id="Fajr Start" type="time">
+            <input id="Fajr Jamaat" type="time">
+            <input id="Sunrise" type="time">
+            <input id="Zohar Start" type="time">
+            <input id="Zohar Jamaat" type="time">
+            <input id="Asar Start" type="time">
+            <input id="Asar Jamaat" type="time">
+            <input id="Maghrib Start" type="time">
+            <input id="Maghrib Jamaat" type="time">
+            <input id="Isha Start" type="time">
+            <input id="Isha Jamaat" type="time">`;
+            insert.setAttribute('id', valueInc);
+            insert.setAttribute('class', 'dRow');
+            html.appendChild(insert);
+    }
+}
+
+
+function populateData() {
+    let data = document.getElementById('data').children;
+    for (let i = 0; i < data.length; i++){
+        let pDate = data[i].id + '/' + currentYear;
+        let inputs = data[i].querySelectorAll('input');
+        for (let input of inputs) {
+            if (input.id != 'Date') {
+                input.value = NamaazData[pDate][input.id];
+            }
+        }
     }
 }

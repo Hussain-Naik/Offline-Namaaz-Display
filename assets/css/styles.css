@@ -404,7 +404,8 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 
 #cHeadings, .dRow {
     display: flex;
-    width: 100%
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 .cTitle {
