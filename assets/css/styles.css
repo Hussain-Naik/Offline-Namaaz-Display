@@ -121,11 +121,6 @@ main {
     text-align: center;
 }
 
-.hidden {
-    visibility: hidden;
-    display: none;
-}
-
 .active {
     border-radius: 75px;
     opacity: 1;
@@ -420,5 +415,13 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 }
 .dRow input[type="time"]::-webkit-calendar-picker-indicator {
     background: none;
+    display: none;
+}
+#calendarDates .selected {
+    background-color: #708e6a;
+}
+
+.hidden {
+    visibility: hidden;
     display: none;
 }

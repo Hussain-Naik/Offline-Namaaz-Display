@@ -3,11 +3,14 @@ const FridayOffset = new Array(2, 3, 4, 5, 6, 0, 1);
 const AfterOffset = new Array(4, 3, 2, 1, 0, 6, 5);
 const NamaazData = JSON.parse(localStorage.getItem('NamaazData'));
 const currentYear = new Date().getFullYear();
+const cMonth = new Date().getMonth();
 
 window.onload = () => {
-    loopMonths(0);
+    calendar(cMonth);
+    updateCalendar(cMonth);
     calendarBefore();
     calendarAfter();
+    setCalendarTarget();
     populateDataInput();
     var reader = new FileReader(),
         picker = document.getElementById("picker");
@@ -34,31 +37,29 @@ window.onload = () => {
 
 document.addEventListener("DOMContentLoaded", function() {
     let previousMonth = document.getElementById('prevousM');
-    let nextMonth = document.getElementById('nextM');
     let month = document.getElementById('currentM');
+    let nextMonth = document.getElementById('nextM');
     let selection = document.getElementById('select');
-    let monthNames = new Array("January", "February", "March", "April",
-		"May", "June", "July", "August",
-		"September", "October", "November", "December");
+    let items = document.getElementsByClassName('dates')
 
     previousMonth.addEventListener('click', function() {
         let incMonth = Number(month.getAttribute('data-type')) < 1 ? 11 : Number(month.getAttribute('data-type')) - 1
-        month.setAttribute('data-type', incMonth);
-        month.innerHTML = monthNames[incMonth];
+        updateCalendar(incMonth)
         resetCalendar();
-        loopMonths(incMonth);
+        calendar(incMonth);
         calendarBefore();
         calendarAfter();
+        setCalendarTarget();
     })
 
     nextMonth.addEventListener('click', function() {
         let incMonth = Number(month.getAttribute('data-type')) > 10 ? 0 : Number(month.getAttribute('data-type')) + 1
-        month.setAttribute('data-type', incMonth);
-        month.innerHTML = monthNames[incMonth];
+        updateCalendar(incMonth)
         resetCalendar();
-        loopMonths(incMonth);
+        calendar(incMonth);
         calendarBefore();
         calendarAfter();
+        setCalendarTarget();
         
     })
 
@@ -75,15 +76,21 @@ document.addEventListener("DOMContentLoaded", function() {
         
     })
 });
-
-function loopMonths(month) {
-    let currentDate = new Date();
+function updateCalendar(arg) {
+    let month = document.getElementById('currentM');
+    let monthNames = new Array("January", "February", "March", "April",
+		"May", "June", "July", "August",
+		"September", "October", "November", "December");
+    month.setAttribute('data-type', arg);
+    month.innerHTML = monthNames[arg];
+}
+function calendar(month) {
     let m = month + 1;
     let d = 1;
     let inc = 1;
-    let loopDate = new Date(currentDate.getFullYear() + '/' + m + '/' + d);
+    let loopDate = new Date(currentYear + '/' + m + '/' + d);
     while (d <= 31) {
-        loopDate = new Date(currentDate.getFullYear() + '/' + m + '/' + d);
+        loopDate = new Date(currentYear + '/' + m + '/' + d);
         let insert = document.getElementById(iDayNames[loopDate.getDay()]).getElementsByClassName('card')[inc];
         
         if (Number(loopDate.getMonth()) <= month) {
@@ -99,6 +106,18 @@ function loopMonths(month) {
         }
         d++;
     }
+}
+
+function setCalendarTarget() {
+    let items = document.getElementById('friday').getElementsByClassName('dates');
+    for (let i = 0; i< items.length; i++) {
+        let days = Number(items[i].innerHTML);
+        let m = items[i].classList[4] == undefined ? Number(items[1].classList[4].slice(5)) : Number(items[i].classList[4].slice(5)) + 1;
+        days = days < 10 ? '0' + days : days;
+        m = m < 10 ? '0' + m : m;
+        items[i].setAttribute('data-target', days +'/'+ m);
+    }
+
 }
 
 function calendarBefore() {
@@ -190,7 +209,7 @@ function populateDataInput() {
             <input id="Isha Start" type="time">
             <input id="Isha Jamaat" type="time">`;
             insert.setAttribute('id', valueInc);
-            insert.setAttribute('class', 'dRow');
+            insert.setAttribute('class', 'dRow hidden');
             html.appendChild(insert);
         }
     }
@@ -224,7 +243,7 @@ function populateLoopDataInput() {
             <input id="Isha Start" type="time">
             <input id="Isha Jamaat" type="time">`;
             insert.setAttribute('id', valueInc);
-            insert.setAttribute('class', 'dRow');
+            insert.setAttribute('class', 'dRow hidden');
         html.insertBefore(insert, html.children[0])
     }
     for (let y = 1; y < countA +1; y++) {
@@ -245,7 +264,7 @@ function populateLoopDataInput() {
             <input id="Isha Start" type="time">
             <input id="Isha Jamaat" type="time">`;
             insert.setAttribute('id', valueInc);
-            insert.setAttribute('class', 'dRow');
+            insert.setAttribute('class', 'dRow hidden');
             html.appendChild(insert);
     }
 }
@@ -253,13 +272,56 @@ function populateLoopDataInput() {
 
 function populateData() {
     let data = document.getElementById('data').children;
+    let classSelection = '' ;
     for (let i = 0; i < data.length; i++){
+        if (i % 7 == 0) {
+            classSelection = (data[i].id);
+        }
+        data[i].classList.add(classSelection)
         let pDate = data[i].id + '/' + currentYear;
         let inputs = data[i].querySelectorAll('input');
         for (let input of inputs) {
             if (input.id != 'Date') {
                 input.value = NamaazData[pDate][input.id];
             }
+        }
+    }
+}
+
+function myfunction(arg) {
+    resetSelection()
+    let selection = arg.classList[3];
+    let nSelection = document.getElementsByClassName(selection);
+    for (let nItem of nSelection) {
+        nItem.classList.add('selected')
+    }
+    resetDataSelection()
+    let dSelect = document.getElementsByClassName('selected')[0].getAttribute('data-target')
+    let dataSelection = document.getElementsByClassName(dSelect);
+    for (let dItem of dataSelection) {
+        dItem.classList.replace('hidden', 'dActive')
+    }
+
+}
+
+function resetSelection() {
+    let pSelection = document.getElementById('calendarDates').getElementsByClassName('selected')[0];
+    if (pSelection != undefined) {
+        let selection = pSelection.classList[3];
+        let rSelection = document.getElementsByClassName(selection);
+        for (let nItem of rSelection) {
+            nItem.classList.remove('selected')
+        }
+    } 
+}
+
+function resetDataSelection() {
+    let dSelection = document.getElementsByClassName('dActive')[0]
+    if (dSelection != undefined) {
+        let selection = dSelection.classList[2];
+        let rSelection = document.getElementsByClassName(selection);
+        for (let nItem of rSelection) {
+            nItem.classList.replace('dActive', 'hidden')
         }
     }
 }
