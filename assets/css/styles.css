@@ -433,12 +433,12 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 .cTitle {
     width: 45px;
     margin: 2px;
-    font-size: 1.5vh;
+    font-size: .8rem;
 }
 .dRow input {
     width: 45px;
     margin: 1px;
-    font-size: 2vh;
+    font-size: .8rem;
 }
 .dRow input[type="time"]::-webkit-calendar-picker-indicator {
     background: none;
