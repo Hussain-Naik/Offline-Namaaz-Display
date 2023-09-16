@@ -12,6 +12,8 @@ window.onload = () => {
     calendarAfter();
     setCalendarTarget();
     populateDataInput();
+    let sWeek = document.getElementById('friday').children[1];
+    weekSelector(sWeek)
     var reader = new FileReader(),
         picker = document.getElementById("picker");
 
@@ -50,6 +52,8 @@ document.addEventListener("DOMContentLoaded", function() {
         calendarBefore();
         calendarAfter();
         setCalendarTarget();
+        let sWeek = document.getElementById('friday').children[1];
+        weekSelector(sWeek)
     })
 
     nextMonth.addEventListener('click', function() {
@@ -60,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function() {
         calendarBefore();
         calendarAfter();
         setCalendarTarget();
-        
+        let sWeek = document.getElementById('friday').children[1];
+        weekSelector(sWeek)
     })
 
     selection.addEventListener('click', function() {
@@ -112,10 +117,11 @@ function setCalendarTarget() {
     let items = document.getElementById('friday').getElementsByClassName('dates');
     for (let i = 0; i< items.length; i++) {
         let days = Number(items[i].innerHTML);
-        let m = items[i].classList[4] == undefined ? Number(items[1].classList[4].slice(5)) : Number(items[i].classList[4].slice(5)) + 1;
+        let m = (items[i].classList[4] == undefined || items[i].classList[4] == 'selected')? Number(items[1].classList[4].slice(5)) : Number(items[i].classList[4].slice(5)) + 1;
+        m = m == 0 ? 12: m;
         days = days < 10 ? '0' + days : days;
         m = m < 10 ? '0' + m : m;
-        items[i].setAttribute('data-target', days +'/'+ m);
+        items[i].setAttribute('id', days +'/'+ m);
     }
 
 }
@@ -296,7 +302,7 @@ function weekSelector(arg) {
         nItem.classList.add('selected')
     }
     resetDataSelection()
-    let dSelect = document.getElementsByClassName('selected')[0].getAttribute('data-target')
+    let dSelect = document.getElementsByClassName('selected')[0].getAttribute('id')
     let dataSelection = document.getElementsByClassName(dSelect);
     for (let dItem of dataSelection) {
         dItem.classList.replace('hidden', 'dActive')
