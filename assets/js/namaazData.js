@@ -195,8 +195,9 @@ function resetCalendar() {
 
 function populateDataInput() {
     let html = document.getElementById('data');
+    let vDate = currentYear + '/01/01'
     for (let i = 1; i < 367; i++){
-        let valueInc = getOffsetDateDM('2023/01/01', i);
+        let valueInc = getOffsetDateDM(vDate, i);
         if(valueInc == '01/01') {
             break
         }
@@ -232,9 +233,11 @@ function populateLoopDataInput() {
     
     let countP = FridayOffset[pDate.getDay()];
     let countA = AfterOffset[aDate.getDay()];
+    
     for (let i = 0;i < countP ; i++){
+        let vDate = currentYear + '/01/01';
         let x = (i + 1)* -1;
-        let valueInc = getOffsetDateDM('2023/01/01', x);
+        let valueInc = getOffsetDateDM(vDate, x);
         let insert = document.createElement('div');
         insert.innerHTML = `
             <input id="Date" type="text" disabled value="`+ valueInc +`">
@@ -255,7 +258,8 @@ function populateLoopDataInput() {
         html.insertBefore(insert, html.children[0])
     }
     for (let y = 1; y < countA +1; y++) {
-        let valueInc = getOffsetDateDM('2023/12/31', y);
+        let vDate = currentYear + '/12/31'
+        let valueInc = getOffsetDateDM(vDate, y);
         let insert = document.createElement('div');
         insert.innerHTML = `
             <input id="Date" type="text" disabled value="`+ valueInc +`">
@@ -286,7 +290,7 @@ function populateData() {
             classSelection = (data[i].id);
         }
         data[i].classList.add(classSelection)
-        let pDate = data[i].id + '/' + currentYear;
+        let pDate = data[i].id;
         let inputs = data[i].querySelectorAll('input');
         for (let input of inputs) {
             if (input.id != 'Date') {
@@ -399,7 +403,7 @@ function inputListeners() {
         for (let item of items) {
             item.addEventListener('focusout', function() {
                 let object = {};
-                let date = this.parentElement.id +'/'+ currentYear
+                let date = this.parentElement.id
                 let cItems = this.parentElement.children;
                 for (let cItem of cItems) {
                     if(cItem.id == 'Date') {
