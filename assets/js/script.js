@@ -174,7 +174,7 @@ function populateTimes() {
 	let m = (today.getMonth() + 1);
 	m = m < 10 ? '0' + m : m;
 	let y = today.getFullYear();
-	let dateString = d + '/' + m + '/' + y;
+	let dateString = d + '/' + m;
 	let tomorrow = getDateByOffset(today, 1)
 	if (tomorrow.slice(-1) != dateString.slice(-1)) {
 		tomorrow = tomorrow.slice(0,-1) + dateString.slice(-1)
@@ -220,7 +220,7 @@ function getDateByOffset(start, offset) {
 	let m = (date.getMonth() + 1);
 	m = m < 10 ? '0' + m : m;
 	let y = date.getFullYear();
-	let dateString = d + '/' + m + '/' + y;
+	let dateString = d + '/' + m;
   return dateString;
 }
 
