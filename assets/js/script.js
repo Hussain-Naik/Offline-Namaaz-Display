@@ -176,11 +176,10 @@ function populateTimes() {
 	let y = today.getFullYear();
 	let dateString = d + '/' + m;
 	let tomorrow = getDateByOffset(today, 1)
-	if (tomorrow.slice(-1) != dateString.slice(-1)) {
-		tomorrow = tomorrow.slice(0,-1) + dateString.slice(-1)
-	}
+	console.log(tomorrow)
 	let currentTimes = namaazData[dateString];
 	let nextTimes = namaazData[tomorrow]
+	
 	let cStart = document.getElementsByClassName('cStart');
 	let cJamaat = document.getElementsByClassName('cJamaat');
 	let nStart = document.getElementsByClassName('nStart');
