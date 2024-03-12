@@ -358,6 +358,8 @@ function checkEidCountdown() {
 
 function displayRemainingDays() {
 	let eidR = returnIslamicDate('month') == "Ramadan" ? 31 - returnIslamicDate('day') : 10 - returnIslamicDate('day');
+	console.log(returnIslamicDate('month'))
+	console.log(returnIslamicDate('day'))
 	return eidR;
 }
 

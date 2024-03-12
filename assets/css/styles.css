@@ -317,7 +317,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 
 .eidCountDown {
     line-height: 1em;
-    font-size: 2.5vh;
+    font-size: 3vw;
     text-shadow: 4px 4px 10px rgba(0,0,0, 0.5);
 }
 
