@@ -432,7 +432,13 @@ function checkNamaazTimer(namaaz, date) {
         namaazTime = namaaz.getAttribute('data-type');
     }
     else{
-        namaazTime = add12Hours(namaaz.getAttribute('data-type'))
+		if(namaaz.getAttribute('id') != 'eidNotice') {
+			namaazTime = add12Hours(namaaz.getAttribute('data-type'))
+		}
+		else {
+			console.log(namaaz.getAttribute('id'))
+			namaazTime = eidNamaazTime
+		}
     }
     let timer = returnTimeDifference(currentTime , namaazTime)
     
