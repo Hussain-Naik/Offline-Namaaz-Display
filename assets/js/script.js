@@ -20,10 +20,6 @@ const slideTimer = Number(localStorage.getItem('inputSlideTimer'));
 const slideDuration = Number(localStorage.getItem('inputSlideDuration'));
 const namaazData = JSON.parse(localStorage.getItem('NamaazData'));
 const islamicDate = [ writeIslamicDate(adjustIDate) , writeIslamicDate(adjustIDate + 1) ];
-//const islamicDate = ['30 Ramadan 1445', '1 Shawwal 1445' ];
-//const islamicDate = ['10 Dhul Hijja 1445', '11 Dhul Hijja 1445' ];
-//const islamicDate = ['9 Dhul Hijja 1445', '10 Dhul Hijja 1445' ];
-//const islamicDate = ['19 Ramadan 1445', '20 Ramadan 1445' ];
 
 let timer = 0;
 let sequence = 1;
@@ -45,6 +41,7 @@ displayEidName();
 let isEid = checkEidDay();
 toggleEid();
 let isEidCounter = checkEidCountdown();
+console.log(isEidCounter)
 toggleEidNotification();
 checkJummah();
 
@@ -176,7 +173,6 @@ function populateTimes() {
 	let y = today.getFullYear();
 	let dateString = d + '/' + m;
 	let tomorrow = getDateByOffset(today, 1)
-	console.log(tomorrow)
 	let currentTimes = namaazData[dateString];
 	let nextTimes = namaazData[tomorrow]
 	
@@ -345,21 +341,23 @@ function checkEidDay() {
 }
 
 function checkEidCountdown() {
-	let bool1 = false;
-	let bool2 = false;
 	let bool = false;
 	let iDate = returnIslamicDate('day');
 	let iMonth = returnIslamicDate('month');
-	bool1 = iDate <= 9 && iMonth == "Dhul Hijja" ? true : false;
-	bool2 = String(iDate).slice(0,1) > 1 && iMonth == "Ramadan" ? true : false;
-	bool = bool1 || bool2 ? true : false;
+	if (iMonth == "Dhul Hijja"){
+		if( iDate <= 9){
+			bool = true;
+		}
+	} 
+	else if (iMonth == "Ramadan"){
+		bool = true;
+	} 
+	
 	return bool;
 }
 
 function displayRemainingDays() {
 	let eidR = returnIslamicDate('month') == "Ramadan" ? 31 - returnIslamicDate('day') : 10 - returnIslamicDate('day');
-	console.log(returnIslamicDate('month'))
-	console.log(returnIslamicDate('day'))
 	return eidR;
 }
 

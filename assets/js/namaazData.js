@@ -11,7 +11,9 @@ window.onload = () => {
     calendarBefore();
     calendarAfter();
     setCalendarTarget();
-    populateDataInput();
+    if(NamaazData != null){
+        populateDataInput();
+    }
     inputListeners()
     
     weekSelector()
