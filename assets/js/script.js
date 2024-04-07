@@ -478,7 +478,11 @@ function checkNamaazTimer(namaaz, date) {
 }
 
 function checkInfoTimer(info, date) {
-	let currentTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+	let currentMinute = date.getMinutes();
+	if (currentMinute < 10){
+		currentMinute = '0'+ currentMinute
+	}
+	let currentTime = date.getHours() + ':' + currentMinute + ':' + date.getSeconds();
 	let infoTimer;
     if (info.firstElementChild.getAttribute('id') != 'zawaal') {
         infoTimer = info.firstElementChild.getAttribute('data-type');
