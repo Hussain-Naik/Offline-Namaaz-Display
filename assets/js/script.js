@@ -498,7 +498,7 @@ function checkInfoTimer(info, date) {
 		}
 		else {
 			let zSeconds = convertToSeconds(info.firstElementChild.getAttribute('data-type'));
-			let zawaalTimer = returnTimeDifference(currentTime , add12Hours(convertToTime(zSeconds, 10)));
+			let zawaalTimer = returnTimeDifference(currentTime , add12Hours(convertToTimeZawaal(zSeconds, 10)));
 			if (Number(zawaalTimer) <= 0) {
 				info.setAttribute('class', 'infoItems');
 				info.firstElementChild.classList.remove('countdown');
@@ -548,6 +548,18 @@ function convertToTime(seconds, offset) {
     m = Math.floor(m / 60);
     m = checkTime(m);
     h = formatTIME12H(h);
+    s = checkTime(s);
+    return h + ':' + m ;
+}
+
+function convertToTimeZawaal(seconds, offset) {
+	let total = (offset == undefined) ? seconds : seconds + (offset * 60);
+    let h = Math.floor(total / 3600);
+    let m = total % 3600;
+    let s = m % 60;
+    m = Math.floor(m / 60);
+    m = checkTime(m);
+    h = checkTime(h);
     s = checkTime(s);
     return h + ':' + m ;
 }
