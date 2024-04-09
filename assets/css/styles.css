@@ -67,7 +67,7 @@ main {
 }
 
 .dName {
-    font-size: 2.5vh;
+    font-size: 3.5vw;
 }
 .announcementInfo {
     width: 85%;
@@ -93,7 +93,7 @@ main {
     justify-content: space-around;
 }
 .displayTimes {
-    width: 85%;
+    width: 95%;
     margin: auto;
     margin-bottom: 1.4%;
     height: 6.6%;
@@ -105,7 +105,7 @@ main {
 }
 
 .eNotice {
-    width: 85%;
+    width: 95%;
     margin: auto;
     height: 9%;
     display: flex;
@@ -176,12 +176,12 @@ main {
     text-transform: uppercase;
 }
 .namaazName {
-    width: 100px;
+    width: 29%;
 }
 
 .eidName {
-    width: 100px;
-    font-size: 2.5vh;
+    width: 29%;
+    font-size: 3.5vw;
 }
 
 .menu-toggle {
