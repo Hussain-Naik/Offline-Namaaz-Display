@@ -67,7 +67,7 @@ main {
 }
 
 .dName {
-    font-size: 3.5vw;
+    font-size: 4.5vw;
 }
 .announcementInfo {
     width: 85%;
@@ -84,7 +84,7 @@ main {
     font-style: italic;
 }
 .displayTitle {
-    width: 85%;
+    width: 95%;
     margin: auto;
     height: 5%;
     display: flex;
@@ -176,12 +176,12 @@ main {
     text-transform: uppercase;
 }
 .namaazName {
-    width: 29%;
+    width: 35%;
 }
 
 .eidName {
-    width: 29%;
-    font-size: 3.5vw;
+    width: 35%;
+    font-size: 4.5vw;
 }
 
 .menu-toggle {
@@ -247,7 +247,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     width: 70%;
     margin-bottom: 2.9vh;
     margin-left: 10px;
-    font-size: 2.5vh;
+    font-size: 3vw;
 }
 
 .inputBox input {
@@ -260,7 +260,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
     border-bottom: 2px solid #999;
     outline: none;
     color: transparent;
-    font-size: 3vh;
+    font-size: 3vw;
     text-transform: uppercase;
     letter-spacing: .15em;
 }
@@ -312,7 +312,7 @@ input:checked ~ .menu-toggle .bar:nth-child(3) {
 .inputBox input:focus ~ label span {
     color: #708e6a;
     letter-spacing: .15em;
-    transform: translateY(-25px);
+    transform: translateY(-45px);
 }
 
 .inputBox input:focus {
