@@ -364,8 +364,7 @@ function displayRemainingDays() {
 function displayEidName() {
 	let eidName = document.getElementsByClassName('eidName');
 
-	let eid = returnIslamicDate('month') == "Ramadan" || returnIslamicDate('month') == "Shawwal" ? "EID UL-FITRA" : "EID UL-ADHA";
-	
+	let eid = returnIslamicDate('month') == "Ramadan" || returnIslamicDate('month') == "Shawwal" || returnIslamicDate('month') == "Sha'ban" ? "EID UL-FITRA" : "EID UL-ADHA";
 	eidName[0].innerHTML = eid;
 	eidName[1].innerHTML = eid;
 }
